@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
-import { db, auth } from '../firebase/config';
+import { auth } from '../firebase/config';
 
 class Login extends Component {
     constructor() {
@@ -54,7 +54,7 @@ class Login extends Component {
                     secureTextEntry={true}
                     value={this.state.password}
                 />
-                <TouchableOpacity style={styles.button} onPress={() => this.login(this.state.email, this.state.passowrd)}>
+                <TouchableOpacity style={styles.button} onPress={() => this.login(this.state.email, this.state.password)}>
                     <Text style={styles.textButton}>Loguearse</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={ () => this.props.navigation.navigate('Register')}>
