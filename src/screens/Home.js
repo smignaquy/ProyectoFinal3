@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList} from 'react-native';
 import { db } from "../firebase/config";
 
 class Home extends Component{
@@ -44,7 +44,7 @@ class Home extends Component{
                         style={styles.flatlist}
                         data= {this.state.posteos}
                         keyExtractor={ unPost => unPost.id }
-                        renderItem={ ({item}) => <Post infoPost = { item } /> }
+                        // renderItem={ ({item}) => <Post infoPost = { item } /> }
                     />
                 }
 
