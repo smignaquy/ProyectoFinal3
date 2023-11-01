@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { TextInput, TouchableOpacity, View, Text, StyleSheet } from 'react-native';
+import { TextInput, TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native';
 import { db, auth } from '../firebase/config';
+import Logo from '../../assets/icon.png';
+
 
 class Register extends Component {
     constructor() {
@@ -10,9 +12,6 @@ class Register extends Component {
             userName: '',
             password: ''
         }
-    }
-    componentDidMount() {
-        console.log('Chequear si el usuario está logueado en Firebase.');
     }
 
     createUser(email, pass, userName) {
@@ -37,25 +36,29 @@ class Register extends Component {
     render() {
         return (
             <View style={styles.formContainer}>
-                <Text>Registro</Text>
+                <Image
+                    source={Logo}
+                    style={styles.avatar}
+                />
+                <Text style={styles.title}>Registro</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => this.setState({ email: text })}
-                    placeholder='email'
+                    placeholder='Correo electrónico'
                     keyboardType='email-address'
                     value={this.state.email}
                 />
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => this.setState({ userName: text })}
-                    placeholder='user name'
+                    placeholder='Nombre de usuario'
                     keyboardType='default'
                     value={this.state.userName}
                 />
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => this.setState({ password: text })}
-                    placeholder='password'
+                    placeholder='Contraseña'
                     keyboardType='default'
                     secureTextEntry={true}
                     value={this.state.password}
@@ -64,7 +67,7 @@ class Register extends Component {
                     <Text style={styles.textButton}>Registrarse</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-                    <Text>Ya tengo cuenta. Ir al login</Text>
+                    <Text style={styles.registerText}>¿Ya tengo cuenta? Ir al inicio de sesión.</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -72,35 +75,47 @@ class Register extends Component {
 }
 
 const styles = StyleSheet.create({
+    title: {
+        alignSelf: 'center',
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+    },
+    avatar: {
+        alignSelf: 'center',
+        width: 50, 
+        height: 50, 
+        marginBottom: 10,
+    },
     input: {
-        height: 20,
-        paddingVertical: 15,
+        height: 40,
+        borderBottomWidth: 1,
+        borderColor: '#1DA1F2',
+        marginBottom: 20,
         paddingHorizontal: 10,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderStyle: 'solid',
-        borderRadius: 6,
-        marginVertical: 10,
     },
     formContainer: {
-        paddingHorizontal: 10,
-        marginTop: 20,
+        flex: 1,
+        backgroundColor: '#ffffff',
+        paddingHorizontal: 20,
+        paddingTop: 100,
     },
     button: {
-        backgroundColor: '#28a745', // Fondo de color verde
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        textAlign: 'center',
-        borderRadius: 4,
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: '#28a745',
+        backgroundColor: '#1DA1F2',
+        paddingVertical: 15,
+        borderRadius: 5,
     },
     textButton: {
-        color: 'white', // Texto en color blanco
-        textAlign: 'center', // Centrar el texto
-        fontWeight: 'bold', // Texto en negritas
-    }
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    registerText: {
+        marginTop: 20,
+        color: '#1DA1F2',
+        textAlign: 'center',
+    },
 })
 
 export default Register;

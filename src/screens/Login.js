@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
 import { auth } from '../firebase/config';
+import Logo from '../../assets/icon.png';
 
 class Login extends Component {
     constructor() {
@@ -38,18 +39,22 @@ class Login extends Component {
     render() {
         return (
             <View style={styles.formContainer}>
-                <Text>Logueate</Text>
+                <Image
+                    source={Logo}
+                    style={styles.avatar}
+                />
+                <Text style={styles.title}>Iniciar sesión</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => this.setState({ email: text })}
-                    placeholder='email'
+                    placeholder='Correo electrónico'
                     keyboardType='email-address'
                     value={this.state.email}
                 />
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => this.setState({ password: text })}
-                    placeholder='password'
+                    placeholder='Contraseña'
                     keyboardType='default'
                     secureTextEntry={true}
                     value={this.state.password}
@@ -58,7 +63,7 @@ class Login extends Component {
                     <Text style={styles.textButton}>Loguearse</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={ () => this.props.navigation.navigate('Register')}>
-                    <Text>Sino estas logueado. Regístrate</Text>
+                    <Text style={styles.registerText}>¿No tienes una cuenta? Regístrate</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -67,33 +72,45 @@ class Login extends Component {
 
 const styles = StyleSheet.create({
     input: {
-        height: 20,
-        paddingVertical: 15,
+        height: 40,
+        borderBottomWidth: 1,
+        borderColor: '#1DA1F2',
+        marginBottom: 20,
         paddingHorizontal: 10,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderStyle: 'solid',
-        borderRadius: 6,
-        marginVertical: 10,
+    },
+    avatar: {
+        alignSelf: 'center',
+        width: 50, // Ajusta el ancho de la imagen según tus necesidades
+        height: 50, // Ajusta la altura de la imagen según tus necesidades
+        marginBottom: 10,
+    },
+    title: {
+        alignSelf: 'center',
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
     },
     formContainer: {
-        paddingHorizontal: 10,
-        marginTop: 20,
+        flex: 1,
+        backgroundColor: '#ffffff',
+        paddingHorizontal: 20,
+        paddingTop: 100,
     },
     button: {
-        backgroundColor: '#28a745', // Fondo de color verde
-        paddingHorizontal: 10,
-        paddingVertical: 6,
+        backgroundColor: '#1DA1F2',
+        paddingVertical: 15,
+        borderRadius: 5,
+    },
+    registerText: {
+        marginTop: 20,
+        color: '#1DA1F2',
         textAlign: 'center',
-        borderRadius: 4,
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: '#28a745',
     },
     textButton: {
-        color: 'white', // Texto en color blanco
-        textAlign: 'center', // Centrar el texto
-        fontWeight: 'bold', // Texto en negritas
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
     }
 })
 
