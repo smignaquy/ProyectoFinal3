@@ -11,6 +11,28 @@ class Login extends Component {
         }
     }
 
+    login(email, pass){
+        auth.signInWithEmailAndPassword(email, pass)
+            .then( response => {
+                //Cuando firebase responde sin error
+                console.log('Login ok', response);
+
+                //Cambiar los estados a vacío como están al inicio.
+                this.setState({
+                    email: '',
+                    password: ''
+                })
+
+                //Redirigir al usuario a la home del sitio.
+                this.props.navigation.navigate('Home')
+
+            })
+            .catch( error => {
+                //Cuando Firebase responde con un error.
+                console.log(error);
+            })
+    }
+
     
 
     render() {
@@ -32,7 +54,7 @@ class Login extends Component {
                     secureTextEntry={true}
                     value={this.state.password}
                 />
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={() => this.login(this.state.email, this.state.passowrd)}>
                     <Text style={styles.textButton}>Loguearse</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={ () => this.props.navigation.navigate('Register')}>
