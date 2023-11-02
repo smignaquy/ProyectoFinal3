@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList} from 'react-native';
 import { db } from "../firebase/config";
+import Post from "../components/Post";
 
 class Home extends Component{
     constructor(){
@@ -37,14 +38,15 @@ class Home extends Component{
                 <TouchableOpacity style={styles.button} onPress={() => {this.props.navigation.navigate('CrearPost')}}>
                     <Text style={styles.textButton}>Crear Post</Text>
                 </TouchableOpacity>
-                <Text style={styles.title}>Ultimos posts</Text>
+                <View style={styles.lineaAzul}></View>
+                <Text style={styles.title}>Últimos posts</Text>
                 {this.state.posteos.length == 0 ? <Text>Cargando...</Text>
                     :
                     <FlatList 
                         style={styles.flatlist}
                         data= {this.state.posteos}
-                        keyExtractor={ unPost => unPost.id }
-                        // renderItem={ ({item}) => <Post infoPost = { item } /> }
+                        keyExtractor={ doc => doc.id.toString() }
+                        renderItem={ ({item}) => <Post infoPost={item}/> }
                     />
                 }
 
@@ -59,6 +61,13 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 20,
+    },
+    lineaAzul: {
+        height: 1,
+        alignSelf: 'center',
+        margin: 15,
+        width: '100%',
+        backgroundColor: '#1DA1F2', // Color azul
     },
     avatar: {
         alignSelf: 'center',
