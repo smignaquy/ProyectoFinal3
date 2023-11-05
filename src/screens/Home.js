@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList} from 'react-native';
 import { db } from "../firebase/config";
 import Post from "../components/Post";
+import componentHeader from '../components/Header';
 
 class Home extends Component{
     constructor(){
@@ -34,6 +35,7 @@ class Home extends Component{
         console.log(this.state.posteos);
         return(
             <View style={styles.formContainer}>
+                < componentHeader />
                 <Text style={styles.title}>Inicio</Text>
                 <TouchableOpacity style={styles.button} onPress={() => {this.props.navigation.navigate('CrearPost')}}>
                     <Text style={styles.textButton}>Crear Post</Text>
