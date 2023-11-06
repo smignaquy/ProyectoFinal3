@@ -57,7 +57,6 @@ class CrearPost extends Component {
     }
 }
 
-export default CrearPost;
 
 const styles = StyleSheet.create({
     container: {
@@ -109,5 +108,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
 });
+
+export default CrearPost;
 
 

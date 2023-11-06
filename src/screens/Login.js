@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
 import { auth } from '../firebase/config';
 import Logo from '../../assets/icon.png';
+import MyCamera from "../components/My-Camera/My-Camera";
 
 class Login extends Component {
     constructor() {
@@ -14,7 +15,10 @@ class Login extends Component {
 
     componentDidMount(){
          //Redirigir al usuario a la home del sitio.
-         this.props.navigation.navigate('Home')
+         auth.onAuthStateChanged( user => {
+            console.log(user)
+            this.props.navigation.navigate('Menu')
+        })
     }
 
     login(email, pass){
@@ -63,6 +67,12 @@ class Login extends Component {
                     keyboardType='default'
                     secureTextEntry={true}
                     value={this.state.password}
+                />
+                <TextInput
+                // agregar componente MyCamera para foto de perfil
+                />
+                <TextInput
+                // agregar mini bio
                 />
                 <TouchableOpacity style={styles.button} onPress={() => this.login(this.state.email, this.state.password)}>
                     <Text style={styles.textButton}>Loguearse</Text>
