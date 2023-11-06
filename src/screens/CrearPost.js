@@ -4,6 +4,7 @@ import { db, auth } from '../firebase/config';
 import Logo from '../../assets/icon.png';
 import Icon from 'react-native-vector-icons/Feather';
 import pensandoElPost from '../../assets/probando.gif';
+import Header from '../components/Header';
 
 class CrearPost extends Component {
     constructor() {
@@ -29,6 +30,7 @@ class CrearPost extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <Header dataNavigation={this.props.navigation} style={styles.logo} />
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
                         <Icon name="arrow-left" size={30} color="#1DA1F2" />
@@ -55,12 +57,14 @@ class CrearPost extends Component {
     }
 }
 
+export default CrearPost;
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
         paddingHorizontal: 20,
-        paddingTop: 100,
+        paddingTop: 10,
     },
     avatar: {
         alignSelf: 'center',
@@ -106,4 +110,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CrearPost;
+

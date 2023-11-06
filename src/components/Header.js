@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 //import Logo from '../../assets/icon.png';
 
 class Header extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
         }
     }
@@ -12,14 +12,17 @@ class Header extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image
-                    source={require('../../assets/icon.png')}
-                    style={styles.logo}
-                />
+                <TouchableOpacity onPress={() => this.props.dataNavigation.navigate('Home')}>
+                    <Image
+                        source={require('../../assets/icon.png')}
+                        style={styles.logo}
+                    />
+                </TouchableOpacity>
             </View>
         )
     }
 }
+export default Header;
 
 const styles = StyleSheet.create({
     container: {
@@ -36,4 +39,3 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Header;
