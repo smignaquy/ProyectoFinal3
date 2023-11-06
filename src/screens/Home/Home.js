@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList} from 'react-native';
-import { db } from "../firebase/config";
-import Post from "../components/Post";
-import Header from '../components/Header';
+import { db } from "../../firebase/config";
+import Post from "../../components/Post/Post";
+import Header from '../../components/Header/Header';
+import { ActivityIndicator } from "react-native-web";
 
 class Home extends Component{
     constructor(){
@@ -43,7 +44,7 @@ class Home extends Component{
                 <View style={styles.lineaAzul}></View>
                 <View>
                 <Text style={styles.title}>Últimos posts</Text>
-                {this.state.posteos.length == 0 ? <Text>Cargando...</Text>
+                {this.state.posteos.length == 0 ? <ActivityIndicator size='large' color='blue' />
                     :
                     <FlatList 
                         style={styles.flatlist}
@@ -53,8 +54,6 @@ class Home extends Component{
                     />
                 }
                 </View>
-  
-
             </View>
         )
     }

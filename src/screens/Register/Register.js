@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { TextInput, TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native';
-import { db, auth } from '../firebase/config';
-import Logo from '../../assets/icon.png';
+import { db, auth } from '../../firebase/config';
+import Logo from '../../../assets/icon.png';
 
 
 class Register extends Component {

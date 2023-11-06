@@ -14,7 +14,7 @@ class Header extends Component {
             <View style={styles.container}>
                 <TouchableOpacity onPress={() => this.props.dataNavigation.navigate('Home')}>
                     <Image
-                        source={require('../../assets/icon.png')}
+                        source={require('../../../assets/icon.png')}
                         style={styles.logo}
                     />
                 </TouchableOpacity>

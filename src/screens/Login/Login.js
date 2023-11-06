@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
-import { auth } from '../firebase/config';
-import Logo from '../../assets/icon.png';
-import MyCamera from "../components/My-Camera/My-Camera";
+import { auth } from '../../firebase/config';
+import Logo from '../../../assets/icon.png';
+import MyCamera from "../../components/My-Camera/My-Camera";
 
 class Login extends Component {
     constructor() {

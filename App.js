@@ -7,9 +7,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 
 // Componentes y Screens
-import LoginScreen from './src/screens/Login';
-import RegisterScreen from './src/screens/Register';
-import Menu from './src/components/Menu';
+import LoginScreen from './src/screens/Login/Login';
+import RegisterScreen from './src/screens/Register/Register';
+import Home from './src/screens/Home/Home'
+import Menu from './src/components/Menu/Menu';
 
 
 export default function App() {

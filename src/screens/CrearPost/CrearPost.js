@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
-import { db, auth } from '../firebase/config';
-import Logo from '../../assets/icon.png';
+import { db, auth } from '../../firebase/config';
+import Logo from '../../../assets/icon.png';
 import Icon from 'react-native-vector-icons/Feather';
-import pensandoElPost from '../../assets/probando.gif';
-import Header from '../components/Header';
+import pensandoElPost from '../../../assets/probando.gif';
+import Header from '../../components/Header/Header';
 
 class CrearPost extends Component {
     constructor() {
