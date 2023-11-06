@@ -22,7 +22,7 @@ class CrearPost extends Component {
                 textoPost: textoPost, //this.state.textoPost,
                 createdAt: createdAt //Date.now(),
             })
-            .then(res => console.log('Post publicado/subido a la base'))
+            .then(res =>   this.props.navigation.navigate('Home'))
             .catch(e => console.log(e));
     }
 

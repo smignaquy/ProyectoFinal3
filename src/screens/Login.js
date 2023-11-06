@@ -12,6 +12,11 @@ class Login extends Component {
         }
     }
 
+    componentDidMount(){
+         //Redirigir al usuario a la home del sitio.
+         this.props.navigation.navigate('Home')
+    }
+
     login(email, pass){
         auth.signInWithEmailAndPassword(email, pass)
             .then( response => {

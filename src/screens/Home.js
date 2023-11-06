@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList} from 'react-native';
 import { db } from "../firebase/config";
 import Post from "../components/Post";
-import componentHeader from '../components/Header';
+import Header from '../components/Header';
 
 class Home extends Component{
     constructor(){
@@ -13,7 +13,7 @@ class Home extends Component{
     }
     componentDidMount(){
         // VerPost(){
-            db.collection('posts').onSnapshot(
+            db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(
                 docs =>{
                     let posts = []
                     docs.forEach( doc => {
@@ -35,12 +35,13 @@ class Home extends Component{
         console.log(this.state.posteos);
         return(
             <View style={styles.formContainer}>
-                < componentHeader />
+                <Header style={styles.logo} />
                 <Text style={styles.title}>Inicio</Text>
                 <TouchableOpacity style={styles.button} onPress={() => {this.props.navigation.navigate('CrearPost')}}>
                     <Text style={styles.textButton}>Crear Post</Text>
                 </TouchableOpacity>
                 <View style={styles.lineaAzul}></View>
+                <View>
                 <Text style={styles.title}>Últimos posts</Text>
                 {this.state.posteos.length == 0 ? <Text>Cargando...</Text>
                     :
@@ -51,6 +52,8 @@ class Home extends Component{
                         renderItem={ ({item}) => <Post infoPost={item}/> }
                     />
                 }
+                </View>
+  
 
             </View>
         )
@@ -92,7 +95,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#ffffff',
         paddingHorizontal: 20,
-        paddingTop: 100,
+        paddingTop: 15,
     },
     button: {
         backgroundColor: '#1DA1F2',
@@ -110,6 +113,9 @@ const styles = StyleSheet.create({
         color: '#1DA1F2',
         textAlign: 'center',
     },
+    logo: {
+        flex: 1
+    }
 })
 
 export default Home;

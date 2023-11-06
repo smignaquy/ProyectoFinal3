@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, View } from 'react-native';
-import Logo from '../../assets/icon.png';
+import { StyleSheet, View, Image } from 'react-native';
+//import Logo from '../../assets/icon.png';
 
 class Header extends Component {
     constructor() {
@@ -13,8 +13,8 @@ class Header extends Component {
         return (
             <View style={styles.container}>
                 <Image
-                    source={Logo}
-                    style={styles.avatar}
+                    source={require('../../assets/icon.png')}
+                    style={styles.logo}
                 />
             </View>
         )
@@ -23,16 +23,16 @@ class Header extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
         backgroundColor: '#ffffff',
         paddingHorizontal: 20,
-        paddingTop: 100,
+        paddingTop: 5,
     },
-    avatar: {
+    logo: {
         alignSelf: 'center',
         width: 50, // Ajusta el ancho de la imagen según tus necesidades
         height: 50, // Ajusta la altura de la imagen según tus necesidades
-        marginBottom: 10,
+        marginBottom: 5,
     },
 });
 
