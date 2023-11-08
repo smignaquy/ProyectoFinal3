@@ -9,7 +9,7 @@ function Menu (){
     return(
         <Tab.Navigator>
             <Tab.Screen name='Home' component={Home}  options={ { headerShown: false }}/>
-            <Tab.Screen name='New Post' component={CrearPost}  options={ { headerShown: false }}/>            
+            <Tab.Screen name='Crear Post' component={CrearPost}  options={ { headerShown: false }}/>            
         </Tab.Navigator>
     )
 }
