@@ -5,6 +5,8 @@ import Logo from '../../../assets/icon.png';
 import Icon from 'react-native-vector-icons/Feather';
 import pensandoElPost from '../../../assets/probando.gif';
 import Header from '../../components/Header/Header';
+import Menu from './src/components/Menu/Menu';
+
 
 class CrearPost extends Component {
     constructor() {

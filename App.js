@@ -3,14 +3,26 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function TabNavigator() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name='Menu' component={Menu} options={ { headerShown: true } }/>
+    </Tab.Navigator>
+  );
+}
 
 // Componentes y Screens
 import LoginScreen from './src/screens/Login/Login';
 import RegisterScreen from './src/screens/Register/Register';
-import Home from './src/screens/Home/Home'
+import HomeScreen from './src/screens/Home/Home'
 import Menu from './src/components/Menu/Menu';
+import CrearPostScreen from './src/screens/CrearPost/CrearPost';
+import MiPerfilScreen from './src/screens/Perfil/Perfil';
 
 
 export default function App() {
@@ -19,7 +31,10 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Login" component={LoginScreen} options={ { headerShown: false } }/>
         <Stack.Screen name="Register" component={RegisterScreen} options={ { headerShown: false } }/>
+        <Stack.Screen name="CrearPost" component={CrearPostScreen} options={ { headerShown: false } }/>
+        <Stack.Screen name="Home" component={HomeScreen} options={ { headerShown: false } }/>
         <Stack.Screen name='Menu' component={Menu} options={ { headerShown: false } }/>
+        <Stack.Screen name="MiPerfil" component={MiPerfilScreen} options={ { headerShown: false } }/>
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -10,6 +10,7 @@ class Header extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <View style={styles.container}>
                 <TouchableOpacity onPress={() => this.props.dataNavigation.navigate('Home')}>
@@ -18,6 +19,9 @@ class Header extends Component {
                         style={styles.logo}
                     />
                 </TouchableOpacity>
+                {/* <TouchableOpacity onPress={() => this.props.dataNavigation.navigate('Perfil')>
+                    <Text>Mi perfil</Text>
+                </TouchableOpacity> */}
             </View>
         )
     }

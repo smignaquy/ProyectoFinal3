@@ -33,7 +33,7 @@ class Home extends Component{
     }
 
     render(){
-        console.log(this.state.posteos);
+        console.log(this.props.navigation);
         return(
             <View style={styles.formContainer}>
                 <Header style={styles.logo} />
@@ -42,7 +42,7 @@ class Home extends Component{
                     <Text style={styles.textButton}>Crear Post</Text>
                 </TouchableOpacity>
                 <View style={styles.lineaAzul}></View>
-                <View>
+                <View style={styles.PostContainer}>
                 <Text style={styles.title}>Últimos posts</Text>
                 {this.state.posteos.length == 0 ? <ActivityIndicator size='large' color='blue' />
                     :
@@ -78,6 +78,9 @@ const styles = StyleSheet.create({
         width: 50, 
         height: 50, 
         marginBottom: 10,
+    },
+    PostContainer: {
+        flex: 1,
     },
     flatlist: {
     	width: '100%',
