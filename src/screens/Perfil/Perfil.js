@@ -8,7 +8,7 @@ class MiPerfil extends Component {
         super(props)
         this.state = {
             email: '',
-            password: '',
+            username: '',
             bio:'',
             fotoPerfil:'',
             posteos:[]
@@ -16,16 +16,51 @@ class MiPerfil extends Component {
     }
 
     componentDidMount(){
-        //quiero cmparar el mail de las props con los usuarios de la base, recuperar los datos de la base y cargadlos al estado
+        //traigo posteos del usuario
+            db.collection('posts').where('owner', '===', auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot(
+                docs =>{
+                    let posts = []
+                    docs.forEach( doc => {
+                        console.log(doc);
+                        posts.push({
+                            id: doc.id,
+                            data: doc.data()
+                })
+                        this.setState({
+                        posteos: posts,
+                        loading: false
+                })
+                })
+            })
+        //traigo datos del usuario
+        db.collection('users').where('owner', '===', auth.currentUser.email).onSnapshot(
+            docs =>{
+                let posts = []
+                docs.forEach( doc => {
+                    console.log(doc);
+                    posts.push({
+                        id: doc.id,
+                        data: doc.data()
+            })
+                    this.setState({
+                        email: doc.owner,
+                        username: doc.username,
+                        // bio: doc.bio,
+                        // fotoPerfil: doc.fotoPerfil,
+            })
+            })
+        })
+
+
     }
 
 
-    
 
     render() {
         return (
             <View style={styles.container}>
-                <Text>Nombre de usuario</Text>
+                <Text>Pagina de Perfil</Text>
+                {/* <Text>Nombre de usuario</Text>
                 <Text>Email del usuario</Text>
                 <Text>Mini bio (si la cargó al registrarse)</Text>
                 <Image 
@@ -35,7 +70,7 @@ class MiPerfil extends Component {
                     {this.state.posteos.length}
                 </Text>
                 <Post //con los posteos del usuario
-                />
+                /> */}
             {/* if ternario, si estoy en mi perfil, deberia poder: 
                 Permitir borrar posteos.
                 Botón para el logout completo del usuario. Si el logout se realiza correctamente la aplicación debe redirigir al usuario a la pantalla de login.

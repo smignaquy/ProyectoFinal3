@@ -5,7 +5,7 @@ import Logo from '../../../assets/icon.png';
 import Icon from 'react-native-vector-icons/Feather';
 import pensandoElPost from '../../../assets/probando.gif';
 import Header from '../../components/Header/Header';
-import Menu from './src/components/Menu/Menu';
+// import Menu from './src/components/Menu/Menu';
 
 
 class CrearPost extends Component {
@@ -25,7 +25,11 @@ class CrearPost extends Component {
                 textoPost: textoPost, //this.state.textoPost,
                 createdAt: createdAt //Date.now(),
             })
-            .then(res =>   this.props.navigation.navigate('Home'))
+            .then(
+                this.setState({
+                    textoPost:""
+                })
+                , res =>   this.props.navigation.navigate('Home'))
             .catch(e => console.log(e));
     }
 

@@ -6,8 +6,8 @@ import IconFull from '@expo/vector-icons';
 
 
 class Post extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             posteos: [],
             // like: false,
@@ -58,7 +58,7 @@ class Post extends Component {
         console.log(this.props.infoPost);
         return (
             <View style={styles.postContainer}>
-                <Text style={styles.postUsario}>Usuario: {this.props.infoPost.data.owner}</Text>
+                <TouchableOpacity style={styles.postUsario} onPress={() => {this.props.navigation.navigate('Perfil')}}>Usuario: {this.props.infoPost.data.owner}</TouchableOpacity>
                 <Text style={styles.postText}>{this.props.infoPost.data.textoPost}</Text>
                 {this.state.like ? 
                     <TouchableOpacity onPress={()=>this.unLike()}>

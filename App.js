@@ -22,7 +22,7 @@ import RegisterScreen from './src/screens/Register/Register';
 import HomeScreen from './src/screens/Home/Home'
 import Menu from './src/components/Menu/Menu';
 import CrearPostScreen from './src/screens/CrearPost/CrearPost';
-import MiPerfilScreen from './src/screens/Perfil/Perfil';
+import PerfilScreen from './src/screens/Perfil/Perfil';
 
 
 export default function App() {
@@ -34,7 +34,7 @@ export default function App() {
         <Stack.Screen name="CrearPost" component={CrearPostScreen} options={ { headerShown: false } }/>
         <Stack.Screen name="Home" component={HomeScreen} options={ { headerShown: false } }/>
         <Stack.Screen name='Menu' component={Menu} options={ { headerShown: false } }/>
-        <Stack.Screen name="MiPerfil" component={MiPerfilScreen} options={ { headerShown: false } }/>
+        <Stack.Screen name="Perfil" component={PerfilScreen} options={ { headerShown: false } }/>
       </Stack.Navigator>
     </NavigationContainer>
   );
