@@ -5,37 +5,45 @@ import Logo from '../../../assets/icon.png';
 import Icon from 'react-native-vector-icons/Feather';
 import pensandoElPost from '../../../assets/probando.gif';
 import Header from '../../components/Header/Header';
+import MyCamera from "../../components/My-Camera/My-Camera";
 // import Menu from './src/components/Menu/Menu';
 
 
 class CrearPost extends Component {
-    constructor() {
-        super();
-        this.state = {
-            textoPost: ''
-        };
+    constructor(){
+        super()
+        this.state={
+           textoPost:'',
+           fotoUrl:'',
+        }
     }
 
-    // 1) Completar la creación de posts
-    crearPost(owner, textoPost, createdAt) {
-        // Crear la colección posts, y si existe, agregar los datos.
-        db.collection('posts')
-            .add({
-                owner: owner, //auth.currentUser.email,
-                textoPost: textoPost, //this.state.textoPost,
-                createdAt: createdAt //Date.now(),
-            })
-            .then(
-                this.setState({
-                    textoPost:""
-                })
-                , res =>   this.props.navigation.navigate('Home'))
-            .catch(e => console.log(e));
+    //1)Completar la creación de posts
+    crearPost(owner, textoPost, fotoUrl, createdAt){
+        //Crear la colección Users
+        db.collection('posts').add({
+            owner: owner, //auth.currentUser.email,
+            textoPost: textoPost, //this.state.textoPost,
+            fotoUrl:fotoUrl,
+            likes:[],
+            createdAt: createdAt //Date.now(), 
+        })
+        .then( res => console.log(res))
+        .catch( e => console.log(e))
     }
+
+    traerUrlDeFoto(url){
+        this.setState({
+            fotoUrl:url
+        })
+    }
+
 
     render() {
         return (
             <View style={styles.container}>
+                {/* Corregir estilos para que se vea bien la cámara */}
+                <MyCamera style={styles.camera} traerUrlDeFoto = {url=>this.traerUrlDeFoto(url)} />
                 <Header dataNavigation={this.props.navigation} style={styles.logo} />
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
