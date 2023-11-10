@@ -13,13 +13,13 @@ class Login extends Component {
         }
     }
 
-    componentDidMount(){
-         //Redirigir al usuario a la home del sitio.
-         auth.onAuthStateChanged( user => {
-            console.log(user)
-            this.props.navigation.navigate('Menu')
-        })
-    }
+    // componentDidMount(){
+    //      //Redirigir al usuario a la home del sitio.
+    //      auth.onAuthStateChanged( user => {
+    //         console.log(user)
+    //         this.props.navigation.navigate('Menu')
+    //     })
+    // }
 
     login(email, pass){
         auth.signInWithEmailAndPassword(email, pass)

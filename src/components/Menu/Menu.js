@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../../screens/Home/Home';
 import CrearPost from '../../screens/CrearPost/CrearPost';
+import MiPerfil from '../../screens/Perfil/Perfil';
 import { Ionicons } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
 
@@ -20,6 +21,12 @@ function Menu () {
                 name='Crear Post'
                 component={CrearPost}
                 options={{ headerShown: false, tabBarIcon: ({ color, size }) => (<Ionicons name="hammer-outline" size={size} color={color} />),
+                }}
+            />
+            <Tab.Screen
+                name='Mi Perfil'
+                component={MiPerfil}
+                options={{ headerShown: false, tabBarIcon: ({ color, size }) => (<Ionicons name="person-outline" size={size} color={color} />),
                 }}
             />
         </Tab.Navigator>

@@ -10,11 +10,12 @@ class Register extends Component {
         this.state = {
             email: '',
             userName: '',
-            password: ''
+            password: '',
+            bio: ''
         }
     }
 
-    createUser(email, pass, userName) {
+    createUser(email, pass, userName, bio) {
         auth.createUserWithEmailAndPassword(email, pass)
             .then(response => {
                 // Cuando Firebase responde sin error
@@ -27,6 +28,7 @@ class Register extends Component {
                     owner: auth.currentUser.email,
                     userName: userName,
                     createdAt: Date.now(),
+                    bio : bio
                 })
                     .then()
                     .catch(e => console.log(e))
@@ -63,7 +65,17 @@ class Register extends Component {
                     secureTextEntry={true}
                     value={this.state.password}
                 />
-                <TouchableOpacity style={styles.button} onPress={() => this.createUser(this.state.email, this.state.password, this.state.userName)}>
+                <TextInput
+                    style={styles.bio}
+                    onChangeText={(text) => this.setState({ bio: text })}
+                    placeholder="Cuentame de tí"
+                    multiline={true}
+                    value={this.state.textoPost}
+                />
+
+            {/* QUEDA LA CAMARA PARA LA IMAGEN DE USUARIO */}
+
+                <TouchableOpacity style={styles.button} onPress={() => this.createUser(this.state.email, this.state.password, this.state.userName, this.state.bio)}>
                     <Text style={styles.textButton}>Registrarse</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
@@ -86,6 +98,13 @@ const styles = StyleSheet.create({
         width: 50, 
         height: 50, 
         marginBottom: 10,
+    },
+    bio: {
+        height: 120,
+        borderBottomWidth: 1,
+        borderColor: '#1DA1F2',
+        marginBottom: 20,
+        paddingHorizontal: 10,
     },
     input: {
         height: 40,

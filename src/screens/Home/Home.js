@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 20,
+        paddingTop: 15
     },
     lineaAzul: {
         height: 1,
@@ -116,7 +117,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     logo: {
-        flex: 1
+        flex: 1,
+        paddingBottom: 150
+
     }
 })
 

@@ -13,7 +13,7 @@ class Header extends Component {
         console.log(this.props);
         return (
             <View style={styles.container}>
-                <TouchableOpacity onPress={() => this.props.dataNavigation.navigate('Home')}>
+                <TouchableOpacity onPress={() => this.props.dataNavigation.navigate('Menu')}>
                     <Image
                         source={require('../../../assets/icon.png')}
                         style={styles.logo}
