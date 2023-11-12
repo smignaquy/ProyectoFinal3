@@ -8,13 +8,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function TabNavigator() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name='Menu' component={Menu} options={ { headerShown: true } }/>
-    </Tab.Navigator>
-  );
-}
+// function TabNavigator() {
+//   return (
+//     <Tab.Navigator>
+//       <Tab.Screen name='Menu' component={Menu} options={ { headerShown: true } }/>
+//     </Tab.Navigator>
+//   );
+// }
 
 // Componentes y Screens
 import LoginScreen from './src/screens/Login/Login';
