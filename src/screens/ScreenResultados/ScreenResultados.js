@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 
 
-class CrearPost extends Component {
+class ScreenResultados extends Component {
     constructor() {
         super();
         this.state = {
@@ -22,4 +22,4 @@ class CrearPost extends Component {
 const styles = StyleSheet.create({
 });
 
-export default CrearPost;
+export default ScreenResultados;

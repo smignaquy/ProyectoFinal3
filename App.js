@@ -24,6 +24,7 @@ import Menu from './src/components/Menu/Menu';
 import CrearPostScreen from './src/screens/CrearPost/CrearPost';
 import PerfilScreen from './src/screens/Perfil/Perfil';
 import Buscador from './src/components/Buscacdor/Buscador';
+import ScreenResultados from './src/screens/ScreenResultados/ScreenResultados';
 
 
 export default function App() {
@@ -37,6 +38,7 @@ export default function App() {
         <Stack.Screen name='Menu' component={Menu} options={ { headerShown: false } }/>
         <Stack.Screen name="Perfil" component={PerfilScreen} options={ { headerShown: false } }/>
         <Stack.Screen name="Buscador" component={Buscador} options={ { headerShown: false } }/>
+        <Stack.Screen name="Resultados" component={ScreenResultados} options={ { headerShown: false } }/>
       </Stack.Navigator>
     </NavigationContainer>
   );

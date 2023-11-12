@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 
 class Buscador extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             textoBuscador: ''
         }
