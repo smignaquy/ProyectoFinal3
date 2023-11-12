@@ -23,6 +23,7 @@ import HomeScreen from './src/screens/Home/Home'
 import Menu from './src/components/Menu/Menu';
 import CrearPostScreen from './src/screens/CrearPost/CrearPost';
 import PerfilScreen from './src/screens/Perfil/Perfil';
+import Buscador from './src/components/Buscacdor/Buscador';
 
 
 export default function App() {
@@ -35,6 +36,7 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen} options={ { headerShown: false } }/>
         <Stack.Screen name='Menu' component={Menu} options={ { headerShown: false } }/>
         <Stack.Screen name="Perfil" component={PerfilScreen} options={ { headerShown: false } }/>
+        <Stack.Screen name="Buscador" component={Buscador} options={ { headerShown: false } }/>
       </Stack.Navigator>
     </NavigationContainer>
   );

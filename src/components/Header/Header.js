@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import Buscador from '../Buscacdor/Buscador';
 //import Logo from '../../assets/icon.png';
 
 class Header extends Component {
@@ -19,6 +20,7 @@ class Header extends Component {
                         style={styles.logo}
                     />
                 </TouchableOpacity>
+                < Buscador style={styles.fromBuscador}/>
                 {/* <TouchableOpacity onPress={() => this.props.dataNavigation.navigate('Perfil')>
                     <Text>Mi perfil</Text>
                 </TouchableOpacity> */}
@@ -41,5 +43,8 @@ const styles = StyleSheet.create({
         height: 50, // Ajusta la altura de la imagen según tus necesidades
         marginBottom: 5,
     },
+    fromBuscador: {
+        alignSelf: 'right',  
+    }
 });
 

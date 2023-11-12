@@ -18,7 +18,7 @@ class CrearPost extends Component {
     }
 
     // 1) Completar la creación de posts
-    crearPost(owner, textoPost, createdAt,photo) {
+    crearPost(owner, textoPost, createdAt, photo) {
         // Crear la colección posts, y si existe, agregar los datos.
         db.collection('posts')
             .add({

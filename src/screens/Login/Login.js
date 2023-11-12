@@ -43,8 +43,6 @@ class Login extends Component {
             })
     }
 
-    
-
     render() {
         return (
             <View style={styles.formContainer}>
