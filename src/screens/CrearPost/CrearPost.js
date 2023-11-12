@@ -5,6 +5,7 @@ import Logo from '../../../assets/icon.png';
 import Icon from 'react-native-vector-icons/Feather';
 import pensandoElPost from '../../../assets/probando.gif';
 import Header from '../../components/Header/Header';
+import MyCamera from "../../components/My-Camera/My-Camera";
 // import Menu from './src/components/Menu/Menu';
 
 
@@ -17,13 +18,14 @@ class CrearPost extends Component {
     }
 
     // 1) Completar la creación de posts
-    crearPost(owner, textoPost, createdAt) {
+    crearPost(owner, textoPost, createdAt,photo) {
         // Crear la colección posts, y si existe, agregar los datos.
         db.collection('posts')
             .add({
                 owner: owner, //auth.currentUser.email,
                 textoPost: textoPost, //this.state.textoPost,
-                createdAt: createdAt, //Date.now(),
+              //  photo: this.state.url
+                createdAt: createdAt, //Date.now()
             })
             .then(res =>   this.props.navigation.navigate('Home'))
             .catch(e => console.log(e));
@@ -40,6 +42,7 @@ class CrearPost extends Component {
                     <Text style={styles.title}>Crear Post</Text>
                 </View>
                 <Text style={styles.userInfo}>Dueño del Post: {auth.currentUser.email}</Text>
+                <MyCamera onImageUpload={(url)=>this.onImageUpload(url)}/>
                 <TextInput
                     style={styles.textInput}
                     onChangeText={(text) => this.setState({ textoPost: text })}

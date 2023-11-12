@@ -15,7 +15,7 @@ class Register extends Component {
         }
     }
 
-    createUser(email, pass, userName, bio) {
+    createUser(email, pass, userName, bio,fdp) {
         auth.createUserWithEmailAndPassword(email, pass)
             .then(response => {
                 // Cuando Firebase responde sin error
@@ -28,7 +28,7 @@ class Register extends Component {
                     owner: auth.currentUser.email,
                     userName: userName,
                     createdAt: Date.now(),
-                    bio : bio
+                    bio : bio 
                 })
                     .then()
                     .catch(e => console.log(e))
@@ -73,10 +73,11 @@ class Register extends Component {
                     value={this.state.textoPost}
                 />
                 <TextInput
-                // agregar componente MyCamera para foto de perfil
-                />
-                <TextInput
-                // agregar mini bio
+                    style={styles.bio}
+                    onChangeText={(text) => this.setState({ bio: text })}
+                    placeholder="Foto de perfil"
+                    multiline={true}
+                    value={this.state.textoPost}
                 />
 
             {/* QUEDA LA CAMARA PARA LA IMAGEN DE USUARIO */}

@@ -71,6 +71,7 @@ class MyCamera extends Component{
             /> 
             <TouchableOpacity> 
                 <Text> Sacar Foto </Text>
+
             </TouchableOpacity> 
             </View>
             
