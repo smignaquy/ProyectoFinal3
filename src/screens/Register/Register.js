@@ -72,6 +72,12 @@ class Register extends Component {
                     multiline={true}
                     value={this.state.textoPost}
                 />
+                <TextInput
+                // agregar componente MyCamera para foto de perfil
+                />
+                <TextInput
+                // agregar mini bio
+                />
 
             {/* QUEDA LA CAMARA PARA LA IMAGEN DE USUARIO */}
 

@@ -68,12 +68,6 @@ class Login extends Component {
                     secureTextEntry={true}
                     value={this.state.password}
                 />
-                <TextInput
-                // agregar componente MyCamera para foto de perfil
-                />
-                <TextInput
-                // agregar mini bio
-                />
                 <TouchableOpacity style={styles.button} onPress={() => this.login(this.state.email, this.state.password)}>
                     <Text style={styles.textButton}>Loguearse</Text>
                 </TouchableOpacity>
