@@ -4,6 +4,7 @@ import { db, auth } from '../../firebase/config';
 import Logo from '../../../assets/icon.png';
 
 
+
 class Register extends Component {
     constructor() {
         super()
@@ -72,13 +73,23 @@ class Register extends Component {
                     multiline={true}
                     value={this.state.textoPost}
                 />
-                <TextInput
+                {/* <TextInput
                     style={styles.bio}
                     onChangeText={(text) => this.setState({ bio: text })}
                     placeholder="Foto de perfil"
                     multiline={true}
-                    value={this.state.textoPost}
-                />
+                    value={this.state.textoPost} */}
+                {/* /> */}
+                <TouchableOpacity
+                style={styles.imagePickerButton}
+                onPress={() => {
+        // Lógica para permitir al usuario seleccionar una imagen de la galería
+        // Puedes utilizar bibliotecas como react-native-image-picker para implementar esta funcionalidad.
+        // Asegúrate de instalar la biblioteca con: npm install react-native-image-picker
+    }}
+                >
+                    <Text style={styles.imagePickerButtonText}>Seleccionar Foto de Perfil</Text>
+                </TouchableOpacity>
 
             {/* QUEDA LA CAMARA PARA LA IMAGEN DE USUARIO */}
 

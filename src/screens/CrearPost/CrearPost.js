@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity, Image } from 'react-native';
 import { db, auth } from '../../firebase/config';
 import Logo from '../../../assets/icon.png';
 import Icon from 'react-native-vector-icons/Feather';
@@ -14,9 +14,17 @@ class CrearPost extends Component {
         super();
         this.state = {
             textoPost: '',
-            placeInput:'¿Qué estás pensando?'
+            placeInput:'¿Qué estás pensando?',
+            fotoUrl:'',
+            publicar: true
         };
     }
+
+    cambioEstadoPublicar(value){
+        this.setState({publicar:value})
+    }
+
+
 
     // 1) Completar la creación de posts
     crearPost(owner, textoPost, createdAt, photo) {
@@ -30,7 +38,7 @@ class CrearPost extends Component {
         .add({
             owner: owner, //auth.currentUser.email,
             textoPost: textoPost, //this.state.textoPost,
-          //  photo: this.state.url
+            photo: this.state.fotoUrl ,
             createdAt: createdAt, //Date.now()
         })
         .then(res =>   {
@@ -44,9 +52,15 @@ class CrearPost extends Component {
 }
         }
 
+        traerUrlDeFoto(url){
+            this.setState({
+                fotoUrl:url
+            })
+        }
+    
     render() {
         return (
-            <View style={styles.formContainer}>
+            <ScrollView style={styles.formContainer}>
                 <Header navigate={this.props.navigation.navigate} style={styles.logo} />
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
@@ -55,7 +69,7 @@ class CrearPost extends Component {
                     <Text style={styles.title}>Crear Post</Text>
                 </View>
                 <Text style={styles.userInfo}>Dueño del Post: {auth.currentUser.email}</Text>
-                <MyCamera onImageUpload={(url)=>this.onImageUpload(url)} stylss={styles.botonFoto}/>
+                <MyCamera cambioEstadoPublicar={(value)=> this.cambioEstadoPublicar(value)} traerUrlDeFoto={(url)=>this.traerUrlDeFoto(url)} stylss={styles.botonFoto}/>
                 <TextInput
                     style={styles.textInput}
                     onChangeText={(text) => this.setState({ textoPost: text })}
@@ -63,14 +77,16 @@ class CrearPost extends Component {
                     multiline={true}
                     value={this.state.textoPost}
                 />
+                {this.state.publicar && 
                 <TouchableOpacity style={styles.postButton} onPress={() => this.crearPost(auth.currentUser.email, this.state.textoPost, Date.now())}>
                     <Text style={styles.buttonText}>Publicar</Text>
                 </TouchableOpacity>
+    }
                 <Image
                     source={pensandoElPost}
                     style={styles.avatar}
                 />
-            </View>
+            </ScrollView>
         );
     }
 }
