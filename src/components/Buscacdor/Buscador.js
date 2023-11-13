@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { db, auth } from '../firebase/config'
+
 
 class Buscador extends Component {
     constructor(props) {
@@ -8,9 +10,23 @@ class Buscador extends Component {
             textoBuscador: ''
         }
     }
+    // db.collection('posts').onSnapshot(
+    //     docs =>{
+    //             let posts = [];
+    //        docs.forEach( doc => {
+    //             posts.push({
+    //                 id: doc.id,
+    //                 data: doc.data()
+    //     })
+    //            this.setState({
+    //             posteos: posts,
+    //             loading: false
+    //        })
+    //     })
 
     buscar(email){
         this.props.navigate('ScreenResultados')
+        // filtrar lo dle imput con el array de usuarios 
     }
 
     render() {
