@@ -1,33 +1,48 @@
 import React, { Component } from "react";
+// import { db, auth } from '../firebase/config';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 
 class Buscador extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            textoBuscador: ''
+            textoBuscador: '',
+            usuarios: [],
+            loading: true,
         }
     }
-    // 
-    // db.collection('posts').onSnapshot(
-    //     docs =>{
-    //             let posts = [];
-    //        docs.forEach( doc => {
-    //             posts.push({
-    //                 id: doc.id,
-    //                 data: doc.data()
-    //     })
-    //            this.setState({
-    //             posteos: posts,
-    //             loading: false
-    //        })
-    //     })
+   
+    componentDidMount() {
+        db.collection('users').onSnapshot(querySnapshot => {
+          let users = [];
+          querySnapshot.forEach(doc => {
+            users.push({
+              id: doc.id,
+              data: doc.data(),
+            });
+          });
+          this.setState({
+            usuarios: users,
+            loading: false,
+          });
+        });
+      }
 
-    buscar(email){
-        this.props.navigate('ScreenResultados')
-        // filtrar lo dle imput con el array de usuarios
-    }
-            
+    // buscar(email){
+    //     this.props.navigate('ScreenResultados')
+    // }
+
+    buscar() {
+        const usuariosfiltrados = this.state.usuarios.filter(user =>
+          user.data.email.includes(this.state.textoBuscador.toLowerCase())
+        );
+        console.log('Usuarios filtrados: ', usuariosfiltrados);
+    
+        this.props.navigation.navigate('ScreenResultados', {
+          usuarios: usuariosfiltrados,
+        });
+      }
+    
 
     render() {
         return (
