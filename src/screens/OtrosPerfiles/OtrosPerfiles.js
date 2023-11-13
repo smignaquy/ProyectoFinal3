@@ -33,8 +33,7 @@ class MiPerfil extends Component {
         
             return (
               <View>
-                  <Header> 
-                <Header style={styles.logo} navigate={this.props.navigation.navigate}/></Header>
+                <Header style={styles.logo} navigate={this.props.navigation.navigate}/>
                 <Text>Perfil de {owner}</Text>
                 
                 {/* Resto del contenido de la pantalla 'OtrosPerfiles' */}

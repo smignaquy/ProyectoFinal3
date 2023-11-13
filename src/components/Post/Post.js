@@ -130,7 +130,7 @@ class Post extends Component {
                 ) : (
                     <Text></Text>
                 )}
-                {this.props.infoPost.data.comentario ? (
+                {!this.props.infoPost.data.comentario ? (
                     <Text style={styles.verComentario}>No hay comentarios</Text>
                 ) : (
                 <TouchableOpacity onPress={() => this.verComentario()}>

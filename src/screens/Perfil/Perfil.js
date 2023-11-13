@@ -11,7 +11,8 @@ class MiPerfil extends Component {
         super(props)
         this.state = {
             usuarios: [],
-            posteos: []
+            posteos: [],
+            mostrarBio: false
         }
     }
 
@@ -59,10 +60,25 @@ console.log(posts)
                         />
                         <View style={styles.lineaAzul}></View>
                         <Text style={styles.username}>{this.state.usuarios[0].owner}</Text>
-                        {this.state.usuarios[0].bio === '' || !this.state.usuarios[0].bio ?
+                        {this.state.usuarios[0].bio === '' || !this.state.usuarios[0].bio ? (
                             <Text style={styles.bio}>No tiene biografía.</Text>
-                        :
+                        ) : (this.state.usuarios[0].bio.length > 200 ? (
+                                <View>
+                                    {this.state.mostrarBio ? (
+                                        <Text style={styles.bio}>{this.state.usuarios[0].bio}</Text>
+                                    ) : (
+                                        <Text style={styles.bio}>{this.state.usuarios[0].bio.substring(0, 200)}</Text>
+                                    )}
+                                    <TouchableOpacity onPress={() => this.setState({ mostrarBio: !this.state.mostrarBio })}>
+                                        <Text style={styles.verComentario}>
+                                            {this.state.mostrarBio ? 'Ver menos' : 'Ver más'}
+                                        </Text>
+                                    </TouchableOpacity>
+                                    
+                                </View>
+                            ) : (
                             <Text style={styles.bio}>{this.state.usuarios[0].bio}</Text>
+                            ))
                         }
                     <TouchableOpacity style={styles.editarPerfilBoton}>
                             <Text style={styles.editarPerfilText}>Editar Perfil</Text>
@@ -94,6 +110,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         paddingHorizontal: 20,
         paddingTop: 15,
+    },
+    verComentario: {
+        color: '#1DA1F2',
+        fontWeight: 'bold',
+        flex: 1,
+        alignSelf: 'center',
+        paddingBottom: 10
     },
     profileContainer: {
         alignItems: 'center',

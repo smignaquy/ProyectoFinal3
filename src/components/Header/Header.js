@@ -1,17 +1,21 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
-import Buscador from '../Buscacdor/Buscador';
-//import Logo from '../../assets/icon.png';
+import { Ionicons } from '@expo/vector-icons'; 
 
 class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            textoBuscador: '' // Agregué el estado inicial para textoBuscador
         }
     }
 
+    buscar(email) {
+        this.props.navigate('ScreenResultados')
+        // filtrar lo del input con el array de usuarios
+    }
+
     render() {
-        console.log('hola', this.props);
         return (
             <View style={styles.container}>
                 <TouchableOpacity onPress={() => this.props.navigate('Home')}>
@@ -20,31 +24,48 @@ class Header extends Component {
                         style={styles.logo}
                     />
                 </TouchableOpacity>
-                < Buscador style={styles.fromBuscador} navigate={this.props.navigate}/>
-                {/* <TouchableOpacity onPress={() => this.props.dataNavigation.navigate('Perfil')}>
-                    <Text>Mi perfil</Text>
-                </TouchableOpacity> */}
+                <View style={styles.inputContainer}>
+                    <TextInput
+                        style={styles.textInput}
+                        onChangeText={(text) => this.setState({ textoBuscador: text })}
+                        placeholder="Buscar por email"
+                        multiline={true}
+                        value={this.state.textoBuscador}
+                    />
+                    <TouchableOpacity onPress={() => this.buscar(this.state.textoBuscador)}>
+                        <Ionicons name="search-circle" size={50} color="#1DA1F2" />
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }
 }
-export default Header;
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
         backgroundColor: '#ffffff',
         paddingHorizontal: 20,
         paddingTop: 40,
+        flexDirection: 'row',
+        alignItems: 'center', // Alinea los elementos verticalmente al centro
+        justifyContent: 'space-between', // Distribuye los elementos a lo largo del contenedor
     },
     logo: {
-        alignSelf: 'center',
-        width: 50, // Ajusta el ancho de la imagen según tus necesidades
-        height: 50, // Ajusta la altura de la imagen según tus necesidades
-        marginBottom: 30,
+        width: 50,
+        height: 50,
     },
-    fromBuscador: {
-        alignSelf: 'right', 
-    }
+    inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center', // Alinea los elementos verticalmente al centro
+    },
+    textInput: {
+        height: 40,
+        borderBottomWidth: 1,
+        borderColor: '#1DA1F2',
+        marginBottom: 20,
+        paddingHorizontal: 10,
+        width: 200,
+    },
 });
 
+export default Header;

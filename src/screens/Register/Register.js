@@ -22,6 +22,7 @@ class Register extends Component {
                 // Cuando Firebase responde sin error
                 console.log('Registrado ok', response);
 
+
                 // Cambiar los estados a vacío como están al inicio.
 
                 // Crear la colección Users
@@ -31,6 +32,8 @@ class Register extends Component {
                     createdAt: Date.now(),
                     bio : bio 
                 })
+                this.props.navigation.navigate('Menu')
+
                     .then()
                     .catch(e => console.log(e))
             })
