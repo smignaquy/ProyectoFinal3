@@ -20,7 +20,7 @@ class Header extends Component {
                         style={styles.logo}
                     />
                 </TouchableOpacity>
-                < Buscador style={styles.fromBuscador}/>
+                {/* < Buscador style={styles.fromBuscador}/> */}
                 {/* <TouchableOpacity onPress={() => this.props.dataNavigation.navigate('Perfil')>
                     <Text>Mi perfil</Text>
                 </TouchableOpacity> */}

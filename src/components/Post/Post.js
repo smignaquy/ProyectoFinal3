@@ -10,7 +10,7 @@ class Post extends Component {
         this.state = {
             like: false,
             mostrarInputComentario: false,
-            comentario: '', // Nuevo estado para almacenar el comentario
+            comentario: '',
         }
     }
 
@@ -57,19 +57,46 @@ class Post extends Component {
             .catch(e => console.log(e))
     }
 
+    comentar() {
+        this.setState({ mostrarInputComentario: true })
+        this.setState({ comentario: '' })
+        db.collection('posts').doc(this.props.infoPost.id).update({
+            comentario: firebase.firestore.FieldValue.arrayUnion({ owner: auth.currentUser.email, textoComentario: this.state.comentario, autor: auth.currentUser.email, createdAt: Date.now() })
+        })
+        .then(this.setState({ comment: '' }))
+        .catch(e => console.log('Error' + e))
+    }
+
+    verComentario(){
+        // db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(
+        //     docs =>{
+        //         let posts = []
+        //         docs.forEach( doc => {
+        //             console.log(doc);
+        //             posts.push({
+        //                 id: doc.id,
+        //                 data: doc.data()
+        //     })
+        //             this.setState({
+        //             posteos: posts,
+        //             loading: false
+        //     })
+        //     })
+        // })    
+    }
+
     render() {
+        console.log(this.props.infoPost.data.comentario);
         return (
             <View style={styles.postContainer}>
                 <Text style={styles.postUsario}>{this.props.infoPost.data.owner}</Text>
                 <Text style={styles.postText}>{this.props.infoPost.data.textoPost}</Text>
                 <View style={styles.interactionContainer}>
                     {this.state.mostrarInputComentario ? (
-                        <TextInput
-                            style={styles.inputComentario}
-                            placeholder="Escribe tu comentario"
-                            value={this.state.comentario}
-                            onChangeText={(text) => this.setState({ comentario: text })}
-                        />
+                        
+                        <TouchableOpacity style={styles.comentarBoton} onPress={() => this.comentar()}>
+                            <Text style={styles.comentarText}>Publicar</Text>
+                        </TouchableOpacity>
                     ) : (
                         <TouchableOpacity style={styles.comentarBoton} onPress={() => this.setState({ mostrarInputComentario: true })}>
                             <Text style={styles.comentarText}>Comentar</Text>
@@ -88,6 +115,26 @@ class Post extends Component {
                         <Text style={styles.contador}>{this.state.cantidadDeLikes}</Text>
                     </View>
                 </View>
+                
+                {this.state.mostrarInputComentario ? (
+                    <View style={styles.comentario}>
+                        <TextInput
+                            style={styles.inputComentario}
+                            placeholder="Escribe tu comentario"
+                            value={this.state.comentario}
+                            onChangeText={(text) => this.setState({ comentario: text })}
+                        />
+                    </View>
+                ) : (
+                    <Text></Text>
+                )}
+                {this.props.infoPost.data.comentario ? (
+                    <Text style={styles.verComentario}>No hay comentarios</Text>
+                ) : (
+                <TouchableOpacity onPress={() => this.verComentario()}>
+                    <Text style={styles.verComentario}>Ver comentarios</Text>
+                </TouchableOpacity>
+                )}
             </View>
         )
     }
@@ -138,11 +185,20 @@ const styles = StyleSheet.create({
     icon: {
         alignSelf: 'flex-end',
     },
+    verComentario: {
+        color: '#1DA1F2',
+        fontWeight: 'bold'
+    },
+    comentario: {
+        flex: 1,
+        padding: 10,
+    },
     inputComentario: {
         flex: 1,
         borderColor: '#1DA1F2',
         borderWidth: 1,
         borderRadius: 5,
+        height: 50,
         paddingHorizontal: 10,
         marginHorizontal: 10,
     }
