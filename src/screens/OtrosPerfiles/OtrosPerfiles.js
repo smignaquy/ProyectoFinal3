@@ -27,13 +27,25 @@ class MiPerfil extends Component {
             }
         )
     }
+        render() {
+            // Obtén el valor de 'owner' de los parámetros de la ruta
+            const owner = this.props.route.params.owner;
+        
+            return (
+              <View>
+                <Text>Perfil de {owner}</Text>
+                {/* Resto del contenido de la pantalla 'OtrosPerfiles' */}
+              </View>
+            );
+          }
+        }
 
-    render() {
-        console.log(this.state.usuarios);
-        return (
-            <View style={styles.container}>
-                <Header style={styles.logo} navigate={this.props.navigation.navigate}/>
-                <Text>Estos son perfiles de otros usuaios</Text>
+        // console.log(this.state.usuarios);
+        // return (
+        //     <View style={styles.container}>
+        //         <Header style={styles.logo} navigate={this.props.navigation.navigate}/>
+        //         <Text>Estos son perfiles de otros usuaios</Text>
+
                 {/* {this.state.usuarios.length > 0 ? (
                     <View style={styles.profileContainer}>
                         <Text style={styles.title}>{this.state.usuarios[0].userName}</Text>
@@ -57,10 +69,10 @@ class MiPerfil extends Component {
                         <ActivityIndicator size='large' color='#1DA1F2' />
                     </View>
                 )} */}
-            </View>
-        )
-    }
-}
+//             </View>
+//         )
+//     }
+// }
 
 const styles = StyleSheet.create({
     container: {

@@ -4,6 +4,7 @@ import { auth, db } from '../../firebase/config';
 import Header from '../../components/Header/Header';
 import { ActivityIndicator } from "react-native-web";
 import foto from '../../../assets/bauti.jpg';
+import Post from '../../components/Post/Post'
 
 class MiPerfil extends Component {
     constructor(props) {
@@ -32,9 +33,11 @@ class MiPerfil extends Component {
             docs => {
                 let posts = []
                 docs.forEach(doc => {
-                    posts.push(doc.data())
+                    posts.push({
+                        id: doc.id,
+                        data: doc.data()})
                 })
-
+console.log(posts)
                 this.setState({
                     posteos: posts,
                 })
@@ -43,7 +46,7 @@ class MiPerfil extends Component {
     }
 
     render() {
-        console.log(this.state.usuarios);
+        console.log(this.state.posteos);
         return (
             <View style={styles.container}>
                 <Header style={styles.logo} navigate={this.props.navigation.navigate}/>
@@ -70,13 +73,13 @@ class MiPerfil extends Component {
                         <ActivityIndicator size='large' color='#1DA1F2' />
                     </View>
                 )}
-                {this.state.posteos.length > 0 ? (
+                {this.state.posteos.length <= 0 ? (
                     <Text>Este usuario no tiene posteos</Text>
                 ) : (
                     <FlatList 
                         style={styles.flatlist}
                         data= {this.state.posteos}
-                        keyExtractor={ doc => doc.id.toString() }
+                        keyExtractor={ doc => doc.createdAt}
                         renderItem={ ({item}) => <Post infoPost={item} navigate={this.props.navigation.navigate}/> }
                     />
                 )}

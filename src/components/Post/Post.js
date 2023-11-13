@@ -86,10 +86,10 @@ class Post extends Component {
     }
 
     render() {
-        console.log(this.props.infoPost.data.comentario);
+        console.log(this.props.infoPost);
         return (
             <View style={styles.postContainer}>
-                <TouchableOpacity onPress={() => {this.props.navigate('OtrosPerfiles')}}>
+                <TouchableOpacity onPress={() => {this.props.navigate('OtrosPerfiles', {owner: this.props.infoPost.data.owner})}}>
                     <Text style={styles.postUsario}>{this.props.infoPost.data.owner}</Text>
                 </TouchableOpacity>
                 <Text style={styles.postText}>{this.props.infoPost.data.textoPost}</Text>
