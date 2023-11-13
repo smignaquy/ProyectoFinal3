@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Camera} from 'expo-camera';
 import {db, storage} from '../../firebase/config';
-import { TouchableOpacity, View, Text } from 'react-native-web';
+import { StyleSheet, TouchableOpacity, View, Text } from 'react-native-web';
 
 
 class MyCamera extends Component{
@@ -69,8 +69,8 @@ class MyCamera extends Component{
                 type={Camera.Constants.Type.front}
                 ref = {metodosDeCamara => this.metodosDeCamara = metodosDeCamara}
             /> 
-            <TouchableOpacity> 
-                <Text> Sacar Foto </Text>
+            <TouchableOpacity style={styles.botonCamara}> 
+                <Text style={styles.textButton}> Sacar Foto </Text>
 
             </TouchableOpacity> 
             </View>
@@ -123,17 +123,23 @@ class MyCamera extends Component{
 
 // }
 
-// const styles = StyleSheet.create({
-// container:{
-//     //flex:1,
-// },
-// cameraBody: {
-//     flex:7
-// },
-// button:{
-//     flex:2,
-// }
-// })
+const styles = StyleSheet.create({
+    botonCamara: {
+        marginLeft: 20,
+        backgroundColor: '#1DA1F2',
+        paddingVertical: 5,
+        borderRadius: 5,
+        width: 100, 
+        height: 30,
+        marginBottom: 10,
+    },
+    textButton: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+})
 
 
 export default MyCamera;

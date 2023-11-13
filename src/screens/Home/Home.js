@@ -36,7 +36,7 @@ class Home extends Component{
         console.log(this.props.navigation);
         return(
             <View style={styles.formContainer}>
-                <Header style={styles.logo} />
+                <Header style={styles.logo} navigate={this.props.navigation.navigate} />
                 <Text style={styles.title}>Inicio</Text>
                 <TouchableOpacity style={styles.button} onPress={() => {this.props.navigation.navigate('CrearPost')}}>
                     <Text style={styles.textButton}>Crear Post</Text>
@@ -50,7 +50,7 @@ class Home extends Component{
                         style={styles.flatlist}
                         data= {this.state.posteos}
                         keyExtractor={ doc => doc.id.toString() }
-                        renderItem={ ({item}) => <Post infoPost={item}/> }
+                        renderItem={ ({item}) => <Post infoPost={item} navigate={this.props.navigation.navigate}/> }
                     />
                 }
                 </View>

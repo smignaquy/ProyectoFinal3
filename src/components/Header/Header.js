@@ -11,17 +11,17 @@ class Header extends Component {
     }
 
     render() {
-        console.log(this.props);
+        console.log('hola', this.props);
         return (
             <View style={styles.container}>
-                <TouchableOpacity onPress={() => this.props.dataNavigation.navigate('Menu')}>
+                <TouchableOpacity onPress={() => this.props.navigate('Home')}>
                     <Image
                         source={require('../../../assets/icon.png')}
                         style={styles.logo}
                     />
                 </TouchableOpacity>
-                {/* < Buscador style={styles.fromBuscador}/> */}
-                {/* <TouchableOpacity onPress={() => this.props.dataNavigation.navigate('Perfil')>
+                < Buscador style={styles.fromBuscador} navigate={this.props.navigate}/>
+                {/* <TouchableOpacity onPress={() => this.props.dataNavigation.navigate('Perfil')}>
                     <Text>Mi perfil</Text>
                 </TouchableOpacity> */}
             </View>
@@ -35,16 +35,16 @@ const styles = StyleSheet.create({
         // flex: 1,
         backgroundColor: '#ffffff',
         paddingHorizontal: 20,
-        paddingTop: 5,
+        paddingTop: 40,
     },
     logo: {
         alignSelf: 'center',
         width: 50, // Ajusta el ancho de la imagen según tus necesidades
         height: 50, // Ajusta la altura de la imagen según tus necesidades
-        marginBottom: 5,
+        marginBottom: 30,
     },
     fromBuscador: {
-        alignSelf: 'right',  
+        alignSelf: 'right', 
     }
 });
 

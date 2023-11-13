@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { auth, db } from '../../firebase/config';
 import Header from '../../components/Header/Header';
 import { ActivityIndicator } from "react-native-web";
@@ -9,8 +9,7 @@ class MiPerfil extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            usuarios: [],
-            posteos: []
+            usuarios: []
         }
     }
 
@@ -27,19 +26,6 @@ class MiPerfil extends Component {
                 })
             }
         )
-
-        db.collection('posts').where("owner", "==", auth.currentUser.email).onSnapshot(
-            docs => {
-                let posts = []
-                docs.forEach(doc => {
-                    posts.push(doc.data())
-                })
-
-                this.setState({
-                    posteos: posts,
-                })
-            }
-        )
     }
 
     render() {
@@ -47,7 +33,8 @@ class MiPerfil extends Component {
         return (
             <View style={styles.container}>
                 <Header style={styles.logo} navigate={this.props.navigation.navigate}/>
-                {this.state.usuarios.length > 0 ? (
+                <Text>Estos son perfiles de otros usuaios</Text>
+                {/* {this.state.usuarios.length > 0 ? (
                     <View style={styles.profileContainer}>
                         <Text style={styles.title}>{this.state.usuarios[0].userName}</Text>
                         <Image
@@ -69,17 +56,7 @@ class MiPerfil extends Component {
                     <View style={styles.loadingContainer}>
                         <ActivityIndicator size='large' color='#1DA1F2' />
                     </View>
-                )}
-                {this.state.posteos.length > 0 ? (
-                    <Text>Este usuario no tiene posteos</Text>
-                ) : (
-                    <FlatList 
-                        style={styles.flatlist}
-                        data= {this.state.posteos}
-                        keyExtractor={ doc => doc.id.toString() }
-                        renderItem={ ({item}) => <Post infoPost={item} navigate={this.props.navigation.navigate}/> }
-                    />
-                )}
+                )} */}
             </View>
         )
     }
@@ -100,7 +77,6 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,
-        marginBottom: 10,
     },
     editarPerfilText: {
         color: 'white',

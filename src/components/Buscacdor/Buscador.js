@@ -10,7 +10,7 @@ class Buscador extends Component {
     }
 
     buscar(email){
-        this.props.navigation.navigate('ScreenResultados')
+        this.props.navigate('ScreenResultados')
     }
 
     render() {
@@ -32,10 +32,9 @@ class Buscador extends Component {
 }
 
 const styles = StyleSheet.create({
-    // container:{
-    //     flex: 1,
-    //     flexDirection: row,
-    // },
+    container:{
+        flexDirection: 'row',
+    },
     textInput: {
         height: 40,
         borderBottomWidth: 1,
@@ -46,6 +45,7 @@ const styles = StyleSheet.create({
         height: 20,
     },
     button: {
+        marginLeft: 20,
         backgroundColor: '#1DA1F2',
         paddingVertical: 5,
         borderRadius: 5,

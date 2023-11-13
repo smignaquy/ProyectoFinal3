@@ -13,28 +13,41 @@ class CrearPost extends Component {
     constructor() {
         super();
         this.state = {
-            textoPost: ''
+            textoPost: '',
+            placeInput:'¿Qué estás pensando?'
         };
     }
 
     // 1) Completar la creación de posts
     crearPost(owner, textoPost, createdAt, photo) {
+        if(textoPost == ''){
+            this.setState({
+                placeInput: 'El texto no puede estar vacio!'
+            })
+        } else {
         // Crear la colección posts, y si existe, agregar los datos.
         db.collection('posts')
-            .add({
-                owner: owner, //auth.currentUser.email,
-                textoPost: textoPost, //this.state.textoPost,
-              //  photo: this.state.url
-                createdAt: createdAt, //Date.now()
+        .add({
+            owner: owner, //auth.currentUser.email,
+            textoPost: textoPost, //this.state.textoPost,
+          //  photo: this.state.url
+            createdAt: createdAt, //Date.now()
+        })
+        .then(res =>   {
+            this.setState({
+                textoPost: '',
+                placeInput:'¿Qué estás pensando?'
             })
-            .then(res =>   this.props.navigation.navigate('Home'))
-            .catch(e => console.log(e));
-    }
+            this.props.navigation.navigate('Home')
+    })
+        .catch(e => console.log(e));
+}
+        }
 
     render() {
         return (
             <View style={styles.formContainer}>
-                <Header dataNavigation={this.props.navigation} style={styles.logo} />
+                <Header navigate={this.props.navigation.navigate} style={styles.logo} />
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.backButton} onPress={() => this.props.navigation.goBack()}>
                         <Icon name="arrow-left" size={30} color="#1DA1F2" />
@@ -42,11 +55,11 @@ class CrearPost extends Component {
                     <Text style={styles.title}>Crear Post</Text>
                 </View>
                 <Text style={styles.userInfo}>Dueño del Post: {auth.currentUser.email}</Text>
-                <MyCamera onImageUpload={(url)=>this.onImageUpload(url)}/>
+                <MyCamera onImageUpload={(url)=>this.onImageUpload(url)} stylss={styles.botonFoto}/>
                 <TextInput
                     style={styles.textInput}
                     onChangeText={(text) => this.setState({ textoPost: text })}
-                    placeholder="¿Qué estás pensando?"
+                    placeholder= {this.state.placeInput}
                     multiline={true}
                     value={this.state.textoPost}
                 />
@@ -73,8 +86,8 @@ const styles = StyleSheet.create({
     avatar: {
         alignSelf: 'center',
         verticalAlign: 'end',
-        width: 500, // Ajusta el ancho de la imagen según tus necesidades
-        height: 500, // Ajusta la altura de la imagen según tus necesidades
+        width: 300, // Ajusta el ancho de la imagen según tus necesidades
+        height: 300, // Ajusta la altura de la imagen según tus necesidades
         marginBottom: 10,
     },
     header: {
@@ -95,7 +108,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     textInput: {
-        height: 120,
+        height: 150,
         borderBottomWidth: 1,
         borderColor: '#1DA1F2',
         marginBottom: 20,

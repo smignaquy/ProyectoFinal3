@@ -89,7 +89,9 @@ class Post extends Component {
         console.log(this.props.infoPost.data.comentario);
         return (
             <View style={styles.postContainer}>
-                <Text style={styles.postUsario}>{this.props.infoPost.data.owner}</Text>
+                <TouchableOpacity onPress={() => {this.props.navigate('OtrosPerfiles')}}>
+                    <Text style={styles.postUsario}>{this.props.infoPost.data.owner}</Text>
+                </TouchableOpacity>
                 <Text style={styles.postText}>{this.props.infoPost.data.textoPost}</Text>
                 <View style={styles.interactionContainer}>
                     {this.state.mostrarInputComentario ? (

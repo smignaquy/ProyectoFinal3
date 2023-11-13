@@ -25,6 +25,7 @@ import CrearPostScreen from './src/screens/CrearPost/CrearPost';
 import PerfilScreen from './src/screens/Perfil/Perfil';
 import Buscador from './src/components/Buscacdor/Buscador';
 import ScreenResultados from './src/screens/ScreenResultados/ScreenResultados';
+import OtrosPerfiles from './src/screens/OtrosPerfiles/OtrosPerfiles'
 
 
 export default function App() {
@@ -33,12 +34,10 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Login" component={LoginScreen} options={ { headerShown: false } }/>
         <Stack.Screen name="Register" component={RegisterScreen} options={ { headerShown: false } }/>
-        <Stack.Screen name="CrearPost" component={CrearPostScreen} options={ { headerShown: false } }/>
-        <Stack.Screen name="Home" component={HomeScreen} options={ { headerShown: false } }/>
         <Stack.Screen name='Menu' component={Menu} options={ { headerShown: false } }/>
-        <Stack.Screen name="Perfil" component={PerfilScreen} options={ { headerShown: false } }/>
         <Stack.Screen name="Buscador" component={Buscador} options={ { headerShown: false } }/>
         <Stack.Screen name="Resultados" component={ScreenResultados} options={ { headerShown: false } }/>
+        <Stack.Screen name="OtrosPerfiles" component={OtrosPerfiles} options={ { headerShown: false } }/>
       </Stack.Navigator>
     </NavigationContainer>
   );

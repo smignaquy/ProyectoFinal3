@@ -18,13 +18,13 @@ function Menu () {
                 }}
             />
             <Tab.Screen
-                name='Crear Post'
+                name='CrearPost'
                 component={CrearPost}
                 options={{ headerShown: false, tabBarIcon: ({ color, size }) => (<Ionicons name="hammer-outline" size={size} color={color} />),
                 }}
             />
             <Tab.Screen
-                name='Mi Perfil'
+                name='Perfil'
                 component={MiPerfil}
                 options={{ headerShown: false, tabBarIcon: ({ color, size }) => (<Ionicons name="person-outline" size={size} color={color} />),
                 }}
