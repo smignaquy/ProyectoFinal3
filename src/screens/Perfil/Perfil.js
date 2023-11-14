@@ -80,6 +80,7 @@ console.log(posts)
                             <Text style={styles.bio}>{this.state.usuarios[0].bio}</Text>
                             ))
                         }
+                    
                     <TouchableOpacity style={styles.editarPerfilBoton}>
                             <Text style={styles.editarPerfilText}>Editar Perfil</Text>
                     </TouchableOpacity>
@@ -92,12 +93,14 @@ console.log(posts)
                 {this.state.posteos.length <= 0 ? (
                     <Text>Este usuario no tiene posteos</Text>
                 ) : (
+                    <View>
                     <FlatList 
                         style={styles.flatlist}
                         data= {this.state.posteos}
                         keyExtractor={ doc => doc.createdAt}
                         renderItem={ ({item}) => <Post infoPost={item} navigate={this.props.navigation.navigate}/> }
                     />
+                    </View>
                 )}
             </View>
         )
