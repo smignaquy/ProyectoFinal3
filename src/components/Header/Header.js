@@ -11,7 +11,12 @@ class Header extends Component {
     }
 
     buscar(email) {
-        this.props.navigate('ScreenResultados')
+        console.log('textoBuscador:', this.state.textoBuscador)
+        console.log('email:', email)
+        this.props.navigate('Resultados', { textoBuscado: email })
+        this.setState({
+            textoBuscador: ''
+        })
         // filtrar lo del input con el array de usuarios
     }
 
@@ -27,7 +32,7 @@ class Header extends Component {
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.textInput}
-                        onChangeText={(text) => this.setState({ textoBuscador: text })}
+                        onChangeText={(text) => {this.setState({ textoBuscador: text })}}
                         placeholder="Buscar por email"
                         multiline={true}
                         value={this.state.textoBuscador}
