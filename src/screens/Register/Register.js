@@ -9,15 +9,28 @@ class Register extends Component {
     constructor() {
         super()
         this.state = {
-            email: '',
-            userName: '',
-            password: '',
-            bio: ''
+            email: 'Correo electrónico (obligatorio)',
+            userName: 'Nombre de usuario (obligatorio)',
+            password: 'Contraseña (obligatorio)',
+            bio: "Cuentame de tí (no obligatorio)"
         }
     }
 
-    createUser(email, pass, userName, bio,fdp) {
-        auth.createUserWithEmailAndPassword(email, pass)
+    createUser(email, pass, userName, bio, fdp) {
+        if (this.state.email === ''){
+            this.setState({
+                email:'Este campo es obligatorio!'
+            })
+        } else if (this.state.userName === ''){
+            this.setState({
+                userName:'Este campo es obligatorio!'
+            })
+        } else if (this.state.password === ''){
+            this.setState({
+                password:'Este campo es obligatorio!'
+            })
+        } else {
+            auth.createUserWithEmailAndPassword(email, pass)
             .then(response => {
                 // Cuando Firebase responde sin error
                 console.log('Registrado ok', response);
@@ -32,11 +45,21 @@ class Register extends Component {
                     createdAt: Date.now(),
                     bio : bio 
                 })
+
+                this.setState({
+                    email: 'Correo electrónico (obligatorio)',
+                    userName: 'Nombre de usuario (obligatorio)',
+                    password: 'Contraseña (obligatorio)',
+                    bio: "Cuentame de tí (no obligatorio)"
+                })
+
                 this.props.navigation.navigate('Menu')
 
                     .then()
                     .catch(e => console.log(e))
             })
+        }
+        
     }
 
     render() {
@@ -50,21 +73,21 @@ class Register extends Component {
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => this.setState({ email: text })}
-                    placeholder='Correo electrónico'
+                    placeholder= {this.state.email}
                     keyboardType='email-address'
                     value={this.state.email}
                 />
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => this.setState({ userName: text })}
-                    placeholder='Nombre de usuario'
+                    placeholder= {this.state.userName}
                     keyboardType='default'
                     value={this.state.userName}
                 />
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => this.setState({ password: text })}
-                    placeholder='Contraseña'
+                    placeholder= {this.state.password}
                     keyboardType='default'
                     secureTextEntry={true}
                     value={this.state.password}
@@ -72,14 +95,14 @@ class Register extends Component {
                 <TextInput
                     style={styles.bio}
                     onChangeText={(text) => this.setState({ bio: text })}
-                    placeholder="Cuentame de tí"
+                    placeholder= {this.state.bio}
                     multiline={true}
                     value={this.state.textoPost}
                 />
                 {/* <TextInput
                     style={styles.bio}
                     onChangeText={(text) => this.setState({ bio: text })}
-                    placeholder="Foto de perfil"
+                    placeholder="Foto de perfil (no obligatorio)"
                     multiline={true}
                     value={this.state.textoPost} */}
                 {/* /> */}
