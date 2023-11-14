@@ -1,20 +1,24 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList } from 'react-native';
 import { auth, db } from '../../firebase/config';
 import Header from '../../components/Header/Header';
 import { ActivityIndicator } from "react-native-web";
 import foto from '../../../assets/bauti.jpg';
+import Post from '../../components/Post/Post'
 
 class MiPerfil extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            usuarios: []
+            usuarios: [],
+            posteos: [],
+            mostrarBio: false
         }
     }
 
     componentDidMount() {
-        db.collection('users').where("owner", "==", auth.currentUser.email).onSnapshot(
+        // traigo datos del usuario
+        db.collection('users').where("owner", "==", this.props.route.params.owner).onSnapshot(
             docs => {
                 let users = []
                 docs.forEach(doc => {
@@ -26,29 +30,29 @@ class MiPerfil extends Component {
                 })
             }
         )
+
+        //traigo posteos
+        db.collection('posts').where("owner", "==", this.props.route.params.owner).onSnapshot(
+            docs => {
+                let posts = []
+                docs.forEach(doc => {
+                    posts.push({
+                        id: doc.id,
+                        data: doc.data()})
+                })
+                console.log(posts)
+                this.setState({
+                    posteos: posts,
+                })
+            }
+        )
     }
-        render() {
-            // Obtén el valor de 'owner' de los parámetros de la ruta
-            const owner = this.props.route.params.owner;
-        
-            return (
-              <View>
+
+    render() {
+        return (
+            <View style={styles.container}>
                 <Header style={styles.logo} navigate={this.props.navigation.navigate}/>
-                <Text>Perfil de {owner}</Text>
-                
-                {/* Resto del contenido de la pantalla 'OtrosPerfiles' */}
-              </View>
-            );
-          }
-        }
-
-        // console.log(this.state.usuarios);
-        // return (
-        //     <View style={styles.container}>
-        //         <Header style={styles.logo} navigate={this.props.navigation.navigate}/>
-        //         <Text>Estos son perfiles de otros usuaios</Text>
-
-                {/* {this.state.usuarios.length > 0 ? (
+                {this.state.usuarios.length > 0 ? (
                     <View style={styles.profileContainer}>
                         <Text style={styles.title}>{this.state.usuarios[0].userName}</Text>
                         <Image
@@ -57,10 +61,25 @@ class MiPerfil extends Component {
                         />
                         <View style={styles.lineaAzul}></View>
                         <Text style={styles.username}>{this.state.usuarios[0].owner}</Text>
-                        {this.state.usuarios[0].bio === '' || !this.state.usuarios[0].bio ?
+                        {this.state.usuarios[0].bio === '' || !this.state.usuarios[0].bio ? (
                             <Text style={styles.bio}>No tiene biografía.</Text>
-                        :
+                        ) : (this.state.usuarios[0].bio.length > 200 ? (
+                                <View>
+                                    {this.state.mostrarBio ? (
+                                        <Text style={styles.bio}>{this.state.usuarios[0].bio}</Text>
+                                    ) : (
+                                        <Text style={styles.bio}>{this.state.usuarios[0].bio.substring(0, 200)}</Text>
+                                    )}
+                                    <TouchableOpacity onPress={() => this.setState({ mostrarBio: !this.state.mostrarBio })}>
+                                        <Text style={styles.verComentario}>
+                                            {this.state.mostrarBio ? 'Ver menos' : 'Ver más'}
+                                        </Text>
+                                    </TouchableOpacity>
+                                    
+                                </View>
+                            ) : (
                             <Text style={styles.bio}>{this.state.usuarios[0].bio}</Text>
+                            ))
                         }
                     <TouchableOpacity style={styles.editarPerfilBoton}>
                             <Text style={styles.editarPerfilText}>Editar Perfil</Text>
@@ -70,11 +89,22 @@ class MiPerfil extends Component {
                     <View style={styles.loadingContainer}>
                         <ActivityIndicator size='large' color='#1DA1F2' />
                     </View>
-                )} */}
-//             </View>
-//         )
-//     }
-// }
+                )}
+                {this.state.posteos.length <= 0 ? (
+                    <Text>Este usuario no tiene posteos</Text>
+                ) : (
+                    <FlatList 
+                        style={styles.flatlist}
+                        data= {this.state.posteos}
+                        keyExtractor={ doc => doc.createdAt}
+                        renderItem={ ({item}) => <Post infoPost={item} navigate={this.props.navigation.navigate}/> }
+                    />
+                )}
+            </View>
+        )
+    }
+}
+
 
 const styles = StyleSheet.create({
     container: {
@@ -82,6 +112,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         paddingHorizontal: 20,
         paddingTop: 15,
+    },
+    verComentario: {
+        color: '#1DA1F2',
+        fontWeight: 'bold',
+        flex: 1,
+        alignSelf: 'center',
+        paddingBottom: 10
     },
     profileContainer: {
         alignItems: 'center',
@@ -91,6 +128,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,
+        marginBottom: 10,
     },
     editarPerfilText: {
         color: 'white',
