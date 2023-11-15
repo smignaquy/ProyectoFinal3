@@ -84,6 +84,7 @@ class MiPerfil extends Component {
                     <TouchableOpacity style={styles.editarPerfilBoton}>
                             <Text style={styles.editarPerfilText}>Editar Perfil</Text>
                     </TouchableOpacity>
+                    <Text style={styles.bio}>Cantidad de posts: {this.state.posteos.length}</Text>
                     </View>
                 ) : (
                     <View style={styles.loadingContainer}>

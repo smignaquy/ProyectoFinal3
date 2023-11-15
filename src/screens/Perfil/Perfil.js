@@ -47,7 +47,7 @@ console.log(posts)
     }
 
     render() {
-        console.log(this.state.posteos);
+        console.log(this.state.posteos.length);
         return (
             <View style={styles.container}>
                 <Header style={styles.logo} navigate={this.props.navigation.navigate}/>
@@ -84,6 +84,7 @@ console.log(posts)
                     <TouchableOpacity style={styles.editarPerfilBoton}>
                             <Text style={styles.editarPerfilText}>Editar Perfil</Text>
                     </TouchableOpacity>
+                    <Text>Cantidad de posts: {this.state.posteos.length}</Text>
                     </View>
                 ) : (
                     <View style={styles.loadingContainer}>
@@ -94,12 +95,12 @@ console.log(posts)
                     <Text>Este usuario no tiene posteos</Text>
                 ) : (
                     <View>
-                    <FlatList 
-                        style={styles.flatlist}
-                        data= {this.state.posteos}
-                        keyExtractor={ doc => doc.createdAt}
-                        renderItem={ ({item}) => <Post infoPost={item} navigate={this.props.navigation.navigate}/> }
-                    />
+                        <FlatList 
+                            style={styles.flatlist}
+                            data= {this.state.posteos}
+                            keyExtractor={ doc => doc.createdAt}
+                            renderItem={ ({item}) => <Post infoPost={item} navigate={this.props.navigation.navigate}/> }
+                        />
                     </View>
                 )}
             </View>

@@ -4,6 +4,7 @@ import { db, auth } from "../../firebase/config";
 import firebase from 'firebase';
 import Header from "../../components/Header/Header";
 import Post from "../../components/Post/Post";
+import MiniPost from "../../components/MiniPost/MiniPost";
 import Comentarios from "../../components/Comentarios/Comentarios";
 import { ScrollView } from "react-native-web";
 
@@ -12,11 +13,25 @@ class MostrarComentarios extends Component {
         super(props);
         this.state = {
             infoPost : this.props.route.params.infoPost,
-            textoPost: ''
+            comentario: ''
         }
     }
 
-    
+    comentar() {
+        this.setState({ mostrarInputComentario: true })
+        this.setState({ comentario: '' })
+        db.collection('posts').doc(this.state.infoPost.id).update({
+            comentario: firebase.firestore.FieldValue.arrayUnion({ owner: auth.currentUser.email, textoComentario: this.state.comentario, autor: auth.currentUser.email, createdAt: Date.now() })
+        })
+        .then(res => {
+            this.setState({ 
+                comment: '' 
+            })             
+            this.props.navigation.navigate('Home')
+        })
+        .catch(e => console.log('Error' + e))
+    }
+
 
 
     render(){
@@ -24,26 +39,31 @@ class MostrarComentarios extends Component {
         return(
             <View style={styles.formContainer}>
                 <Header style={styles.logo} navigate={this.props.navigation.navigate} />
-                <Text style={styles.title}>Comentario del post de {this.state.infoPost.data.owner}</Text>
+                {/* <View style={styles.postContainer}>
+
+                </View> */}
+                <MiniPost infoPost= {this.state.infoPost} navigate={this.props.navigation.navigate}/>
+                <Text style={styles.title}>Post de {this.state.infoPost.data.owner}</Text>
                 <View style={styles.containerComentario}>
                     <TextInput
                         style={styles.textInput}
-                        onChangeText={(text) => this.setState({ textoPost: text })}
+                        onChangeText={(text) => this.setState({ comentario: text })}
                         placeholder= '¿Qué quieres comentar?'
                         multiline={true}
                         // value={this.state.textoPost}
                     />
-                    <TouchableOpacity style={styles.postButton} onPress={() => this.crearPost(auth.currentUser.email, this.state.textoPost, Date.now())}>
+                    <TouchableOpacity style={styles.postButton} onPress={() => this.comentar()}>
                         <Text style={styles.buttonText}>Comentar</Text>
                     </TouchableOpacity>
                 </View>
+                <Text style={styles.titleSub}>Comentarios</Text>
                 {/* <ScrollView style={styles.postContainer}> */}
                     {/* <TouchableOpacity onPress={() => {this.props.navigate('OtrosPerfiles', {owner: this.props.infoPost.data.owner})}}>
                         <Text style={styles.postUsario}>{this.props.infoPost.data.owner}</Text>
                     </TouchableOpacity> */}
                 {/* </ScrollView> */}
 
-                <Comentarios infoPost={this.state.infoPost.data.comentario}/>
+                <Comentarios comentarios={this.state.infoPost.data.comentario} navigate={this.props.navigation.navigate}/>
                 
             </View>
         )
@@ -96,6 +116,14 @@ const styles = StyleSheet.create({
     },
     title: {
         paddingTop: 30,
+        fontSize: 20,
+        alignSelf: 'center',
+        fontWeight: 'bold',
+        color: 'black',
+    },
+    titleSub: {
+        paddingTop: 30,
+        paddingBottom: 30,
         fontSize: 20,
         alignSelf: 'center',
         fontWeight: 'bold',

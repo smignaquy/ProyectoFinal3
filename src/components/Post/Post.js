@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity , TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity , TextInput , Image} from 'react-native';
 import { db, auth } from "../../firebase/config";
 import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/Feather';
+import foto from '../../../assets/bauti.jpg';
 
 class Post extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             like: false,
             mostrarInputComentario: false,
@@ -67,43 +68,37 @@ class Post extends Component {
         .catch(e => console.log('Error' + e))
     }
 
-    verComentario(){
-        // db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(
-        //     docs =>{
-        //         let posts = []
-        //         docs.forEach( doc => {
-        //             console.log(doc);
-        //             posts.push({
-        //                 id: doc.id,
-        //                 data: doc.data()
-        //     })
-        //             this.setState({
-        //             posteos: posts,
-        //             loading: false
-        //     })
-        //     })
-        // })    
-    }
 
     render() {
         console.log(this.props.infoPost);
         return (
             <View style={styles.postContainer}>
-                <TouchableOpacity onPress={() => {this.props.navigate('OtrosPerfiles', {owner: this.props.infoPost.data.owner})}}>
-                    <Text style={styles.postUsario}>{this.props.infoPost.data.owner}</Text>
-                </TouchableOpacity>
+                <View style={styles.container}>
+                    <TouchableOpacity style={styles.fotoUsuario} onPress={() => {this.props.navigate('OtrosPerfiles', {owner: this.props.infoPost.data.owner})}}>
+                        <Image
+                            source={foto}
+                            style={styles.avatar}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => {this.props.navigate('OtrosPerfiles', {owner: this.props.infoPost.data.owner})}}>
+                        <Text style={styles.postUsario}>{this.props.infoPost.data.owner}</Text>
+                    </TouchableOpacity>
+                </View>
                 <Text style={styles.postText}>{this.props.infoPost.data.textoPost}</Text>
                 <View style={styles.interactionContainer}>
-                    {this.state.mostrarInputComentario ? (
-                        
-                        <TouchableOpacity style={styles.comentarBoton} onPress={() => this.comentar()}>
-                            <Text style={styles.comentarText}>Publicar</Text>
-                        </TouchableOpacity>
-                    ) : (
-                        <TouchableOpacity style={styles.comentarBoton} onPress={() => this.setState({ mostrarInputComentario: true })}>
-                            <Text style={styles.comentarText}>Comentar</Text>
-                        </TouchableOpacity>
-                    )}
+                    {/* {this.props.showButton && ( */}
+                        {this.state.mostrarInputComentario ? (
+                            
+                            <TouchableOpacity style={styles.comentarBoton} onPress={() => this.comentar()}>
+                                <Text style={styles.comentarText}>Publicar</Text>
+                            </TouchableOpacity>
+                        ) : (
+                            <TouchableOpacity style={styles.comentarBoton} onPress={() => this.setState({ mostrarInputComentario: true })}>
+                                <Text style={styles.comentarText}>Comentar</Text>
+                            </TouchableOpacity>
+                        )}
+                    {/* )} */}
+                    {/* IRIA HASTA ACA } */}
                     <View style={styles.likesContainer}>
                         {this.state.like ?
                             <TouchableOpacity onPress={() => this.unLike()}>
@@ -117,26 +112,31 @@ class Post extends Component {
                         <Text style={styles.contador}>{this.state.cantidadDeLikes}</Text>
                     </View>
                 </View>
-                
-                {this.state.mostrarInputComentario ? (
-                    <View style={styles.comentario}>
-                        <TextInput
+                {/* {this.props.showButton && ( */}
+                    <View>
+                        {this.state.mostrarInputComentario ? (
+                        <View style={styles.comentario}>
+                            <TextInput
                             style={styles.inputComentario}
                             placeholder="Escribe tu comentario"
                             value={this.state.comentario}
                             onChangeText={(text) => this.setState({ comentario: text })}
-                        />
+                            />
+                        </View>
+                        ) : (
+                        <Text></Text>
+                        )}
+                        {!this.props.infoPost.data.comentario ? (
+                        <Text style={styles.verComentario}>No hay comentarios</Text>
+                        ) : (
+                        <TouchableOpacity onPress={() => this.props.navigate('MostrarComentarios', { infoPost: this.props.infoPost })}>
+                            <Text style={styles.verComentario}>Ver comentarios</Text>
+                        </TouchableOpacity>
+                        )}
                     </View>
-                ) : (
-                    <Text></Text>
-                )}
-                {!this.props.infoPost.data.comentario ? (
-                    <Text style={styles.verComentario}>No hay comentarios</Text>
-                ) : (
-                <TouchableOpacity onPress={() => this.props.navigate('MostrarComentarios', {infoPost: this.props.infoPost}) }>
-                    <Text style={styles.verComentario}>Ver comentarios</Text>
-                </TouchableOpacity>
-                )}
+                {/* )} */}
+
+                {/* IRIA TAMBIEN HASTA ACA } */}
             </View>
         )
     }
@@ -148,7 +148,24 @@ const styles = StyleSheet.create({
         padding: 10,
         marginBottom: 10,
         borderRadius: 10,
-        border: '1px solid #e1e8ed', // Puedes ajustar el estilo del borde según tus preferencias
+        border: '1px solid #e1e8ed', 
+    },
+    container: {
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      fotoUsuario: {
+        marginRight: 10, 
+      },
+      postUsario: {
+        fontSize: 16,
+      },
+    avatar: {
+        width: 30,
+        height: 30,
+        borderRadius: 60,
+        marginVertical: 20,
+        borderColor: 'black'
     },
     postUsario: {
         fontSize: 16,
