@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#ffffff',
         paddingHorizontal: 20,
-        paddingTop: 40,
+        paddingTop: 10,
         flexDirection: 'row',
         alignItems: 'center', // Alinea los elementos verticalmente al centro
         justifyContent: 'space-between', // Distribuye los elementos a lo largo del contenedor

@@ -4,12 +4,11 @@ import { db, auth } from "../../firebase/config";
 import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/Feather';
 
-class Post extends Component {
-    constructor() {
-        super();
+class Comentarios extends Component {
+    constructor(props) {
+        super(props);
         this.state = {
             like: false,
-            mostrarInputComentario: false,
             comentario: '',
         }
     }
@@ -57,53 +56,15 @@ class Post extends Component {
             .catch(e => console.log(e))
     }
 
-    comentar() {
-        this.setState({ mostrarInputComentario: true })
-        this.setState({ comentario: '' })
-        db.collection('posts').doc(this.props.infoPost.id).update({
-            comentario: firebase.firestore.FieldValue.arrayUnion({ owner: auth.currentUser.email, textoComentario: this.state.comentario, autor: auth.currentUser.email, createdAt: Date.now() })
-        })
-        .then(this.setState({ comment: '' }))
-        .catch(e => console.log('Error' + e))
-    }
-
-    verComentario(){
-        // db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(
-        //     docs =>{
-        //         let posts = []
-        //         docs.forEach( doc => {
-        //             console.log(doc);
-        //             posts.push({
-        //                 id: doc.id,
-        //                 data: doc.data()
-        //     })
-        //             this.setState({
-        //             posteos: posts,
-        //             loading: false
-        //     })
-        //     })
-        // })    
-    }
 
     render() {
-        console.log(this.props.infoPost);
+        console.log(this.props.infoPost.data.comentario[0].autor);
         return (
             <View style={styles.postContainer}>
-                <TouchableOpacity onPress={() => {this.props.navigate('OtrosPerfiles', {owner: this.props.infoPost.data.owner})}}>
-                    <Text style={styles.postUsario}>{this.props.infoPost.data.owner}</Text>
+                <TouchableOpacity onPress={() => {this.props.navigate('OtrosPerfiles', {owner: this.props.infoPost.data.comentario[0].autor})}}>
+                    <Text style={styles.postUsario}>{this.props.infoPost.data.comentario[0].autor}</Text>
                 </TouchableOpacity>
-                <Text style={styles.postText}>{this.props.infoPost.data.textoPost}</Text>
-                <View style={styles.interactionContainer}>
-                    {this.state.mostrarInputComentario ? (
-                        
-                        <TouchableOpacity style={styles.comentarBoton} onPress={() => this.comentar()}>
-                            <Text style={styles.comentarText}>Publicar</Text>
-                        </TouchableOpacity>
-                    ) : (
-                        <TouchableOpacity style={styles.comentarBoton} onPress={() => this.setState({ mostrarInputComentario: true })}>
-                            <Text style={styles.comentarText}>Comentar</Text>
-                        </TouchableOpacity>
-                    )}
+                <Text style={styles.postText}>{this.props.infoPost.data.comentario[0].textoComentario}</Text>
                     <View style={styles.likesContainer}>
                         {this.state.like ?
                             <TouchableOpacity onPress={() => this.unLike()}>
@@ -115,28 +76,7 @@ class Post extends Component {
                             </TouchableOpacity>
                         }
                         <Text style={styles.contador}>{this.state.cantidadDeLikes}</Text>
-                    </View>
-                </View>
-                
-                {this.state.mostrarInputComentario ? (
-                    <View style={styles.comentario}>
-                        <TextInput
-                            style={styles.inputComentario}
-                            placeholder="Escribe tu comentario"
-                            value={this.state.comentario}
-                            onChangeText={(text) => this.setState({ comentario: text })}
-                        />
-                    </View>
-                ) : (
-                    <Text></Text>
-                )}
-                {!this.props.infoPost.data.comentario ? (
-                    <Text style={styles.verComentario}>No hay comentarios</Text>
-                ) : (
-                <TouchableOpacity onPress={() => this.props.navigate('MostrarComentarios', {infoPost: this.props.infoPost}) }>
-                    <Text style={styles.verComentario}>Ver comentarios</Text>
-                </TouchableOpacity>
-                )}
+                    </View>                
             </View>
         )
     }
@@ -206,4 +146,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Post;
+export default Comentarios;

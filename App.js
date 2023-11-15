@@ -25,7 +25,8 @@ import CrearPostScreen from './src/screens/CrearPost/CrearPost';
 import PerfilScreen from './src/screens/Perfil/Perfil';
 import Buscador from './src/components/Buscacdor/Buscador';
 import ScreenResultados from './src/screens/ScreenResultados/ScreenResultados';
-import OtrosPerfiles from './src/screens/OtrosPerfiles/OtrosPerfiles'
+import OtrosPerfiles from './src/screens/OtrosPerfiles/OtrosPerfiles';
+import ScreenMostrarComentarios from './src/screens/MostrarComentarios/MostrarComentarios';
 
 
 export default function App() {
@@ -37,6 +38,7 @@ export default function App() {
         <Stack.Screen name='Menu' component={Menu} options={ { headerShown: false } }/>
         <Stack.Screen name="Buscador" component={Buscador} options={ { headerShown: false } }/>
         <Stack.Screen name="Resultados" component={ScreenResultados} options={ { headerShown: false } }/>
+        <Stack.Screen name="MostrarComentarios" component={ScreenMostrarComentarios} options={ { headerShown: false } }/>
         <Stack.Screen name="OtrosPerfiles" component={OtrosPerfiles} options={ { headerShown: false } }/>
       </Stack.Navigator>
     </NavigationContainer>
