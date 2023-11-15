@@ -4,6 +4,7 @@ import CrearPost from '../../screens/CrearPost/CrearPost';
 import MiPerfil from '../../screens/Perfil/Perfil';
 import { Ionicons } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
+import ScreenResultaods from '../../screens/ScreenResultados/ScreenResultados'
 
 
 const Tab = createBottomTabNavigator();

@@ -9,10 +9,11 @@ class Register extends Component {
     constructor() {
         super()
         this.state = {
-            email: 'Correo electrónico (obligatorio)',
-            userName: 'Nombre de usuario (obligatorio)',
-            password: 'Contraseña (obligatorio)',
-            bio: "Cuentame de tí (no obligatorio)"
+            email: '',
+            userName: '',
+            password: '',
+            bio: '',
+            error:''
         }
     }
 
@@ -56,7 +57,12 @@ class Register extends Component {
                 this.props.navigation.navigate('Menu')
 
                     .then()
-                    .catch(e => console.log(e))
+                    .catch(e => 
+                        {console.log(e), 
+                        this.setState({
+                            error: e.message
+                        })
+                    })
             })
         }
         
@@ -73,21 +79,21 @@ class Register extends Component {
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => this.setState({ email: text })}
-                    placeholder= {this.state.email}
+                    placeholder= 'Correo electrónico (obligatorio)'
                     keyboardType='email-address'
                     value={this.state.email}
                 />
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => this.setState({ userName: text })}
-                    placeholder= {this.state.userName}
+                    placeholder= 'Nombre de usuario (obligatorio)'
                     keyboardType='default'
                     value={this.state.userName}
                 />
                 <TextInput
                     style={styles.input}
                     onChangeText={(text) => this.setState({ password: text })}
-                    placeholder= {this.state.password}
+                    placeholder= 'Contraseña (obligatorio)'
                     keyboardType='default'
                     secureTextEntry={true}
                     value={this.state.password}
@@ -95,7 +101,7 @@ class Register extends Component {
                 <TextInput
                     style={styles.bio}
                     onChangeText={(text) => this.setState({ bio: text })}
-                    placeholder= {this.state.bio}
+                    placeholder= "Cuentame de tí (no obligatorio)"
                     multiline={true}
                     value={this.state.textoPost}
                 />
@@ -116,6 +122,7 @@ class Register extends Component {
                 >
                     <Text style={styles.imagePickerButtonText}>Seleccionar Foto de Perfil</Text>
                 </TouchableOpacity>
+                <Text styles={styles.error}>{this.state.error}</Text>
 
             {/* QUEDA LA CAMARA PARA LA IMAGEN DE USUARIO */}
 
@@ -179,6 +186,11 @@ const styles = StyleSheet.create({
         color: '#1DA1F2',
         textAlign: 'center',
     },
+    error: {
+        color: 'red',
+        marginBottom: 10,
+        height: 10,
+    }
 })
 
 export default Register;

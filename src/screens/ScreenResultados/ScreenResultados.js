@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator, FlatList } from 'react-native';
 import { auth, db } from '../../firebase/config';
 
 class ScreenResultados extends Component {
@@ -17,10 +17,12 @@ class ScreenResultados extends Component {
             docs => {
                 let users = []
                 docs.forEach(doc => {
-                    console.log('doc', doc)
-                    if(doc.owner.toLowerCase().includes(textoBuscado)){
+                    let data = doc.data()
+                    if(data.owner.toLowerCase().includes(textoBuscado)){
+                        console.log('entra al primer if', doc.data())
                         users.push(doc.data())
-                    } else if(doc.userName.toLowerCase().includes(textoBuscado)){
+                    } else if(data.userName.toLowerCase().includes(textoBuscado)){
+                        console.log('entra al segundo if', doc.data())
                         users.push(doc.data())
                     }
                 })
@@ -44,7 +46,7 @@ class ScreenResultados extends Component {
                         <FlatList 
                             style={styles.flatlist}
                             data= {this.state.usuarios}
-                            keyExtractor={ doc => doc.id.toString() }
+                            keyExtractor={ doc => doc.createdAt }
                             renderItem={ ({item}) => <Text>{item.owner}</Text> }
                         />
                     </ View>

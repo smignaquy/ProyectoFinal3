@@ -18,7 +18,7 @@ class MiPerfil extends Component {
 
     componentDidMount() {
         db.collection('users').where("owner", "==", auth.currentUser.email).onSnapshot(
-            docs => {
+            docs => {   
                 let users = []
                 docs.forEach(doc => {
                     users.push(doc.data())
@@ -44,6 +44,11 @@ console.log(posts)
                 })
             }
         )
+    }
+
+    logout(){
+        auth.signOut()
+        .then(res => this.props.navigation.navigate('Login'))
     }
 
     render() {
@@ -81,8 +86,8 @@ console.log(posts)
                             ))
                         }
                     
-                    <TouchableOpacity style={styles.editarPerfilBoton}>
-                            <Text style={styles.editarPerfilText}>Editar Perfil</Text>
+                    <TouchableOpacity style={styles.editarPerfilBoton} onPress={() => this.logout()}>
+                            <Text style={styles.editarPerfilText}>Cerrar Sesión</Text>
                     </TouchableOpacity>
                     <Text>Cantidad de posts: {this.state.posteos.length}</Text>
                     </View>
