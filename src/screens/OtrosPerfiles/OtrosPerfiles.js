@@ -48,6 +48,11 @@ class MiPerfil extends Component {
         )
     }
 
+    logout(){
+        auth.signOut()
+        .then(res => this.props.navigation.navigate('Login'))
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -81,9 +86,14 @@ class MiPerfil extends Component {
                             <Text style={styles.bio}>{this.state.usuarios[0].bio}</Text>
                             ))
                         }
-                    <TouchableOpacity style={styles.editarPerfilBoton}>
-                            <Text style={styles.editarPerfilText}>Editar Perfil</Text>
-                    </TouchableOpacity>
+                    {this.state.usuarios[0].owner == auth.currentUser.email ? (
+                        <TouchableOpacity style={styles.editarPerfilBoton} onPress={() => this.logout()}>
+                                <Text style={styles.editarPerfilText}>Cerrar Sesión</Text>
+                        </TouchableOpacity>
+                        ) : (
+                            <View></View>
+                        )
+                    }
                     <Text style={styles.bio}>Cantidad de posts: {this.state.posteos.length}</Text>
                     </View>
                 ) : (

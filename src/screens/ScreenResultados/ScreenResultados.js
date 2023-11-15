@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator, FlatList } from 'react-native';
 import { auth, db } from '../../firebase/config';
+import Header from '../../components/Header/Header';
 
 class ScreenResultados extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            usuarios: []
+            usuarios: [],
+            datos: false
         };
     }
 
@@ -29,6 +31,7 @@ class ScreenResultados extends Component {
 
                 this.setState({
                     usuarios: users,
+                    datos: true
                 })
             }
         )
@@ -39,17 +42,20 @@ class ScreenResultados extends Component {
         console.log('render')
         return (
             <View style={styles.container}>
-                {this.state.usuarios.length === 0 ? <ActivityIndicator size='large' color='blue' /> 
-                :
-                    <View>
-                        <Text>Estos son tus resultados de busqueda de {textoBuscado}</Text>
-                        <FlatList 
-                            style={styles.flatlist}
-                            data= {this.state.usuarios}
-                            keyExtractor={ doc => doc.createdAt }
-                            renderItem={ ({item}) => <Text>{item.owner}</Text> }
-                        />
-                    </ View>
+                <Header style={styles.logo} navigate={this.props.navigation.navigate}/>
+                {this.state.datos == false ? <ActivityIndicator size='large' color='blue' />
+                : 
+                    this.state.usuarios.length === 0 ?  <Text>No hay resultados para la bsuqueda {textoBuscado}</Text>
+                        :
+                            <View>
+                                <Text>Estos son tus resultados de busqueda de {textoBuscado}</Text>
+                                <FlatList 
+                                    style={styles.flatlist}
+                                    data= {this.state.usuarios}
+                                    keyExtractor={ doc => doc.createdAt }
+                                    renderItem={ ({item}) => <Text>{item.owner}</Text> }
+                                />
+                            </ View>
                 }
             </View>
         );
@@ -58,6 +64,10 @@ class ScreenResultados extends Component {
 
 
 const styles = StyleSheet.create({
+    logo: {
+        flex: 1,
+        paddingBottom: 150,
+    },
 });
 
 export default ScreenResultados;

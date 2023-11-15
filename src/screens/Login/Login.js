@@ -16,8 +16,10 @@ class Login extends Component {
     componentDidMount(){
          //Redirigir al usuario a la home del sitio.
          auth.onAuthStateChanged( user => {
+            if(user){
+                this.props.navigation.navigate('Menu')
+            }
             console.log(user)
-            this.props.navigation.navigate('Menu')
         })
     }
 

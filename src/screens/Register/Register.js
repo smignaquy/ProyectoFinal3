@@ -55,14 +55,12 @@ class Register extends Component {
                 })
 
                 this.props.navigation.navigate('Menu')
-
-                    .then()
-                    .catch(e => 
-                        {console.log(e), 
-                        this.setState({
-                            error: e.message
-                        })
-                    })
+            })
+            .catch(e => 
+                {console.log('error:',e.message), 
+                this.setState({
+                    error: e.message
+                })
             })
         }
         
