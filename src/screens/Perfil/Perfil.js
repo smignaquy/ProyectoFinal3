@@ -97,7 +97,9 @@ console.log(posts)
                     </View>
                 )}
                 {this.state.posteos.length <= 0 ? (
-                    <Text>Este usuario no tiene posteos</Text>
+                    <View style={styles.tienePosteos}>
+                        <Text >Este usuario no tiene posteos</Text>
+                    </View>
                 ) : (
                     <View>
                         <FlatList 
@@ -129,6 +131,9 @@ const styles = StyleSheet.create({
     },
     profileContainer: {
         alignItems: 'center',
+    },
+    tienePosteos : {
+        alignSelf: 'center'
     },
     editarPerfilBoton: {
         backgroundColor: '#1DA1F2',

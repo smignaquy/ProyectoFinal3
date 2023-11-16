@@ -40,36 +40,37 @@ class ScreenResultados extends Component {
 
     render() {
         let textoBuscado = this.props.route.params.textoBuscado
-        console.log('render')
+        console.log(this.state.usuarios)
         return (
-            <View style={styles.container}>
-                <Header style={styles.logo} navigate={this.props.navigation.navigate}/>
-                {this.state.datos == false ? <ActivityIndicator size='large' color='blue' />
-                : 
-                    this.state.usuarios.length === 0 ?  <Text>No hay resultados para la bsuqueda: {textoBuscado}</Text>
-                        :
-                            <View style={styles.container}>
-                                <Text>Estos son tus resultados de busqueda de: {textoBuscado}</Text>
-                                <View style={styles.lineaAzul}></View>
-                                <FlatList 
-                                    style={styles.flatlist}
-                                    data= {this.state.usuarios}
-                                    keyExtractor={ doc => doc.createdAt }
-                                    renderItem={ ({item}) => 
-                                    <TouchableOpacity style={styles.mailContainer} onPress={() => {this.props.navigate('OtrosPerfiles', {owner: item.owner} )}} >
-                                        <Text>{item.owner}</Text>
-                                        <Text>{item.userName}</Text>
-                                        <Image
-                                            source={foto}
-                                            style={styles.avatar}
-                                        />
-                                    </TouchableOpacity>
-                                    
-                                }
-                                />
-                            </ View>
-                }
-            </View>
+                
+                <View style={styles.formContainer}>
+                    <Header style={styles.logo} navigate={this.props.navigation.navigate}/>
+                    {this.state.datos == false ? <ActivityIndicator size='large' color='blue' />
+                    : 
+                        this.state.usuarios.length === 0 ?  <Text>No hay resultados para la bsuqueda: {textoBuscado}</Text>
+                            :
+                                <View style={styles.container}>
+                                    <Text>Estos son tus resultados de busqueda de: {textoBuscado}</Text>
+                                    <View style={styles.lineaAzul}></View>
+                                    <FlatList 
+                                        style={styles.flatlist}
+                                        data= {this.state.usuarios}
+                                        keyExtractor={ doc => doc.createdAt }
+                                        renderItem={ ({item}) => 
+                                        <TouchableOpacity style={styles.mailContainer} onPress={() => {this.props.navigation.navigate('OtrosPerfiles', {owner: item.owner})}} >
+                                            <Text style={styles.postUsario}>{item.owner}</Text>
+                                            <Text>{item.userName}</Text>
+                                            <Image
+                                                source={foto}
+                                                style={styles.avatar}
+                                            />
+                                        </TouchableOpacity>
+                                        
+                                    }
+                                    />
+                                </ View>
+                    }
+                </View>
         );
     }
 }
@@ -84,10 +85,21 @@ const styles = StyleSheet.create({
         borderBlockColor: '#1DA1F2',
         alignItems: 'center',
     },
-    logo: {
-        flex: 1,
-        paddingBottom: 150,
+    postUsario: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#1DA1F2',
     },
+    formContainer: {
+        flex: 1,
+        backgroundColor: '#ffffff',
+        paddingHorizontal: 20,
+        paddingTop: 15,
+    },
+    // logo: {
+    //     flex: 1,
+    //     paddingBottom: 150,
+    // },
     avatar: {
         width: 120,
         height: 120,

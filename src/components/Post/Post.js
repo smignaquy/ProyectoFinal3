@@ -157,9 +157,7 @@ const styles = StyleSheet.create({
       fotoUsuario: {
         marginRight: 10, 
       },
-      postUsario: {
-        fontSize: 16,
-      },
+      
     avatar: {
         width: 30,
         height: 30,

@@ -34,7 +34,7 @@ class Header extends Component {
                     <TextInput
                         style={styles.textInput}
                         onChangeText={(text) => {this.setState({ textoBuscador: text })}}
-                        placeholder="Buscar por email"
+                        placeholder="Buscar usuarios.."
                         multiline={true}
                         value={this.state.textoBuscador}
                     />
