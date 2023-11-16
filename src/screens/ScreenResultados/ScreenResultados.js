@@ -49,7 +49,7 @@ class ScreenResultados extends Component {
                     this.state.usuarios.length === 0 ?  <Text>No hay resultados para la bsuqueda: {textoBuscado}</Text>
                         :
                             <View style={styles.container}>
-                                <Text>Estos son tus resultados de busqueda de {textoBuscado}</Text>
+                                <Text>Estos son tus resultados de busqueda de: {textoBuscado}</Text>
                                 <View style={styles.lineaAzul}></View>
                                 <FlatList 
                                     style={styles.flatlist}
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
     flatlist: {
-        width: 450, 
+        width: 350, 
         marginBottom: 30,
     },
     lineaAzul: {
@@ -110,6 +110,11 @@ const styles = StyleSheet.create({
     mailContainer: {
         alignItems: 'center',
         borderColor: '#1DA1F2',
+        backgroundColor: 'white',
+        padding: 10,
+        borderRadius: 10,
+        border: '1px solid #e1e8ed',
+        marginBottom: 10,
     }
 });
 

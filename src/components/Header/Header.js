@@ -13,7 +13,8 @@ class Header extends Component {
     buscar(email) {
         console.log('textoBuscador:', this.state.textoBuscador)
         console.log('email:', email)
-        this.props.navigate('Resultados', { textoBuscado: email }, {navigate : this.props.navigation })
+        console.log('props:', this.props)
+        this.props.navigate('Resultados', { textoBuscado: email }, {navigate : this.props.navigate })
         this.setState({
             textoBuscador: ''
         })
