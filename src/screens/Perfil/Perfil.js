@@ -4,7 +4,7 @@ import { auth, db } from '../../firebase/config';
 import Header from '../../components/Header/Header';
 import { ActivityIndicator } from "react-native-web";
 import foto from '../../../assets/bauti.jpg';
-import Post from '../../components/Post/Post'
+import Post from '../../components/Post/Post';
 
 class MiPerfil extends Component {
     constructor(props) {
