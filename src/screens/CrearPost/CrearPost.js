@@ -27,7 +27,7 @@ class CrearPost extends Component {
 
 
     // 1) Completar la creación de posts
-    crearPost(owner, textoPost, createdAt, photo) {
+    crearPost(owner, textoPost, createdAt, fotoUrl) {
         if(textoPost == ''){
             this.setState({
                 placeInput: 'El texto no puede estar vacio!'
@@ -38,7 +38,7 @@ class CrearPost extends Component {
         .add({
             owner: owner, //auth.currentUser.email,
             textoPost: textoPost, //this.state.textoPost,
-            photo: this.state.fotoUrl ,
+            fotoUrl: this.state.fotoUrl ,
             createdAt: createdAt, //Date.now()
         })
         .then(res =>   {
