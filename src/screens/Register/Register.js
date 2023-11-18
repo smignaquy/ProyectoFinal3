@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { TextInput, TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native';
 import { db, auth } from '../../firebase/config';
 import Logo from '../../../assets/icon.png';
+import MyCamera from '../../components/My-Camera/My-Camera'
 
 
 
@@ -13,7 +14,9 @@ class Register extends Component {
             userName: '',
             password: '',
             bio: '',
-            error:''
+            error:'',
+            fdp: '',
+            mostarcamara: false, 
         }
     }
 
@@ -64,6 +67,13 @@ class Register extends Component {
             })
         }
         
+    }
+    
+    traerUrlDeFoto(url){
+        this.setState({
+            fotoDePerfil:url,
+            mostarcamara: false,
+        })
     }
 
     render() {
@@ -118,15 +128,27 @@ class Register extends Component {
         // Asegúrate de instalar la biblioteca con: npm install react-native-image-picker
     }}
                 >
-                    <Text style={styles.imagePickerButtonText}>Seleccionar Foto de Perfil</Text>
+                {/* <Text style={styles.imagePickerButtonText}>Seleccionar Foto de Perfil</Text> */}
                 </TouchableOpacity>
                 <Text styles={styles.error}>{this.state.error}</Text>
+           
+                {
+            this.state.mostarcamara ?
+                <View style={styles.camara}>
+                    <MyCamera traerUrlDeFoto={url => this.traerUrlDeFoto(url)} />
+                </View>
+                :
+                <TouchableOpacity style={styles.input} onPress={() => this.setState({ mostarcamara: true })}>
+                    <Text>Foto de perfil</Text>
+                </TouchableOpacity>
+             }  
 
             {/* QUEDA LA CAMARA PARA LA IMAGEN DE USUARIO */}
 
                 <TouchableOpacity style={styles.button} onPress={() => this.createUser(this.state.email, this.state.password, this.state.userName, this.state.bio)}>
                     <Text style={styles.textButton}>Registrarse</Text>
                 </TouchableOpacity>
+
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
                     <Text style={styles.registerText}>¿Ya tengo cuenta? Ir al inicio de sesión.</Text>
                 </TouchableOpacity>
