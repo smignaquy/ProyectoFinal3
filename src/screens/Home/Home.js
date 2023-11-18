@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList} from 'react-native';
-import { db } from "../../firebase/config";
+import { db, auth} from "../../firebase/config";
 import Post from "../../components/Post/Post";
 import Header from '../../components/Header/Header';
 import { ActivityIndicator } from "react-native-web";
@@ -32,11 +32,19 @@ class Home extends Component{
         // }
     }
 
+    logout(){
+        auth.signOut()
+        .then(res => this.props.navigation.navigate('Login'))
+    }
+
     render(){
         console.log(this.props.navigation);
         return(
             <View style={styles.formContainer}>
                 <Header style={styles.logo} navigate={this.props.navigation.navigate} />
+                <TouchableOpacity style={styles.editarPerfilBoton} onPress={() => this.logout()}>
+                            <Text style={styles.editarPerfilText}>Cerrar Sesión</Text>
+                </TouchableOpacity>
                 <Text style={styles.title}>Inicio</Text>
                 <TouchableOpacity style={styles.button} onPress={() => {this.props.navigation.navigate('CrearPost')}}>
                     <Text style={styles.textButton}>Crear Post</Text>

@@ -44,9 +44,9 @@ class Register extends Component {
 
                 // Crear la colección Users
                 db.collection('users').add({
-                    owner: auth.currentUser.email,
-                    userName: userName,
-                    createdAt: Date.now(),
+                    owner : auth.currentUser.email,
+                    userName : userName,
+                    createdAt : Date.now(),
                     bio : bio 
                 })
 
@@ -71,8 +71,8 @@ class Register extends Component {
     
     traerUrlDeFoto(url){
         this.setState({
-            fotoDePerfil:url,
-            mostarcamara: false,
+            fotoDePerfil : url,
+            mostarcamara : false,
         })
     }
 
@@ -113,35 +113,21 @@ class Register extends Component {
                     multiline={true}
                     value={this.state.textoPost}
                 />
-                {/* <TextInput
-                    style={styles.bio}
-                    onChangeText={(text) => this.setState({ bio: text })}
-                    placeholder="Foto de perfil (no obligatorio)"
-                    multiline={true}
-                    value={this.state.textoPost} */}
-                {/* /> */}
                 <TouchableOpacity
-                style={styles.imagePickerButton}
-                onPress={() => {
-        // Lógica para permitir al usuario seleccionar una imagen de la galería
-        // Puedes utilizar bibliotecas como react-native-image-picker para implementar esta funcionalidad.
-        // Asegúrate de instalar la biblioteca con: npm install react-native-image-picker
-    }}
+                    style={styles.imagePickerButton}
+                    onPress={() => {}}
                 >
-                {/* <Text style={styles.imagePickerButtonText}>Seleccionar Foto de Perfil</Text> */}
                 </TouchableOpacity>
                 <Text styles={styles.error}>{this.state.error}</Text>
-           
-                {
-            this.state.mostarcamara ?
-                <View style={styles.camara}>
-                    <MyCamera traerUrlDeFoto={url => this.traerUrlDeFoto(url)} />
-                </View>
-                :
-                <TouchableOpacity style={styles.input} onPress={() => this.setState({ mostarcamara: true })}>
-                    <Text>Foto de perfil</Text>
-                </TouchableOpacity>
-             }  
+                    { this.state.mostarcamara ?
+                        <View style={styles.camara}>
+                            <MyCamera traerUrlDeFoto={(url)=>this.traerUrlDeFoto(url)} />
+                        </View>
+                    :
+                        <TouchableOpacity style={styles.input} onPress={() => this.setState({ mostarcamara: true })}>
+                            <Text>Foto de perfil</Text>
+                        </TouchableOpacity>
+                    }  
 
             {/* QUEDA LA CAMARA PARA LA IMAGEN DE USUARIO */}
 

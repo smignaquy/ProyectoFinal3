@@ -84,6 +84,16 @@ class Post extends Component {
                         <Text style={styles.postUsario}>{this.props.infoPost.data.owner}</Text>
                     </TouchableOpacity>
                 </View>
+                {this.props.infoPost.data.photo != '' ? (
+                    <View style={styles.fotoContainer}>
+                        <Image
+                            source={this.props.infoPost.data.photo}
+                            style={styles.fotoPost}
+                        /> 
+                    </View>    
+                    ) : (
+                        <View></View>
+                )}
                 <Text style={styles.postText}>{this.props.infoPost.data.textoPost}</Text>
                 <View style={styles.interactionContainer}>
                     {/* {this.props.showButton && ( */}
@@ -218,6 +228,15 @@ const styles = StyleSheet.create({
         height: 50,
         paddingHorizontal: 10,
         marginHorizontal: 10,
+    },
+    fotoPost: {
+        height: 400,
+        width: 350,
+    },
+    fotoContainer:{
+        alignItems: 'center',
+        marginTop : 5,
+        marginBottom: 5,
     }
 });
 

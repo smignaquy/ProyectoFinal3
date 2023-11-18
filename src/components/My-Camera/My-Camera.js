@@ -37,8 +37,16 @@ class MyCamera extends Component {
             .catch(e=>console.log(e))
     }
 
+    cancelar(){
+        console.log("Cancelando...");
+        this.setState({
+            urlInternaFoto:'',
+            mostrarCamara: true,
+        })
+    }
+
     guardarFoto(){
-        this.props.cambioEstadoPublicar (false)
+        // this.props.cambioEstadoPublicar (false)
         fetch(this.state.urlInternaFoto)
             .then( res => res.blob()) //.blob() recupera datos binarios. Las fotos son archivos binarios.
             .then( image => {
@@ -55,7 +63,7 @@ class MyCamera extends Component {
                                 this.setState({
                                     urlInternaFoto: '',
                                 })
-                                this.props.cambioEstadoPublicar (true)
+                                // this.props.cambioEstadoPublicar (true)
                             } )
                     })
 
@@ -87,7 +95,7 @@ class MyCamera extends Component {
                             <TouchableOpacity onPress={ () => this.guardarFoto() }>
                                 <Text>Aceptar</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity >
+                            <TouchableOpacity onPress={()=>this.cancelar()}>
                                 <Text>Cancelar</Text>
                             </TouchableOpacity>
                         </React.Fragment>

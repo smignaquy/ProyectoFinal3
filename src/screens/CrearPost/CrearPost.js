@@ -34,28 +34,28 @@ class CrearPost extends Component {
             })
         } else {
         // Crear la colección posts, y si existe, agregar los datos.
-        db.collection('posts')
-        .add({
-            owner: owner, //auth.currentUser.email,
-            textoPost: textoPost, //this.state.textoPost,
-            fotoUrl: this.state.fotoUrl ,
-            createdAt: createdAt, //Date.now()
-        })
-        .then(res =>   {
-            this.setState({
-                textoPost: '',
-                placeInput:'¿Qué estás pensando?'
+            db.collection('posts')
+            .add({
+                owner: owner, //auth.currentUser.email,
+                textoPost: textoPost, //this.state.textoPost,
+                fotoPerfil: this.state.fotoUrl ,
+                createdAt: createdAt, //Date.now()
             })
-            this.props.navigation.navigate('Home')
-    })
-        .catch(e => console.log(e));
-}
-        }
+            .then(res =>   {
+                this.setState({
+                    textoPost: '',
+                    placeInput:'¿Qué estás pensando?'
+                })
+                this.props.navigation.navigate('Home')
+            })
+            .catch(e => console.log(e));
+    }}
 
         traerUrlDeFoto(url){
             this.setState({
                 fotoUrl:url
             })
+            console.log('url: ', this.state.fotoUrl)
         }
     
     render() {
