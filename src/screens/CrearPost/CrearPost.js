@@ -57,6 +57,7 @@ class CrearPost extends Component {
             })
             console.log('url: ', this.state.fotoUrl)
         }
+
     
     render() {
         return (
@@ -87,10 +88,11 @@ class CrearPost extends Component {
                     style={styles.avatar}
                 />
             </ScrollView>
+            
+            
         );
     }
 }
-
 
 const styles = StyleSheet.create({
     formContainer: {

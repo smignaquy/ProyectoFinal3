@@ -68,6 +68,10 @@ class Post extends Component {
         .catch(e => console.log('Error' + e))
     }
 
+    borrarPost() {
+        db.collection('posts').doc(this.props.infoPost.id).delete();
+          }
+  
 
     render() {
         console.log(this.props.infoPost);
@@ -107,6 +111,16 @@ class Post extends Component {
                                 <Text style={styles.comentarText}>Comentar</Text>
                             </TouchableOpacity>
                         )}
+
+                    {this.props.infoPost.data.owner === auth.currentUser.email ? (
+                                <TouchableOpacity style={styles.comentarBoton} onPress={() => this.borrarPost()}>
+                                    <Text style={styles.comentarText}> Borrar Post </Text>
+                                </TouchableOpacity>
+                                ) : (
+                                <Text></Text>
+                                )}
+
+                        
                     {/* )} */}
                     {/* IRIA HASTA ACA } */}
                     <View style={styles.likesContainer}>
@@ -144,10 +158,16 @@ class Post extends Component {
                         </TouchableOpacity>
                         )}
                     </View>
-                {/* )} */}
 
-                {/* IRIA TAMBIEN HASTA ACA } */}
-            </View>
+                {/* {this.props.infoPost.data.owner === auth.currentUser.email ? (
+              <TouchableOpacity style={styles.comentarText} onPress={() => this.borrarPost()}>
+                  <Text style={styles.comentarText}> Borrar Post </Text>
+              </TouchableOpacity>
+            ) : (
+              <Text></Text>
+            )} */}
+
+      </View>
         )
     }
 }
@@ -238,6 +258,7 @@ const styles = StyleSheet.create({
         marginTop : 5,
         marginBottom: 5,
     }
+    
 });
 
 export default Post;

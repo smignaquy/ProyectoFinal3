@@ -105,7 +105,7 @@ console.log(posts)
                         <FlatList 
                             style={styles.flatlist}
                             data= {this.state.posteos}
-                            keyExtractor= { doc => doc.createdAt }
+                            keyExtractor={ doc => doc.createdAt}
                             renderItem={ ({item}) => <Post infoPost={item} navigate={this.props.navigation.navigate}/> }
                         />
                     </View>
