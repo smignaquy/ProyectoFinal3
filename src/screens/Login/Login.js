@@ -9,7 +9,8 @@ class Login extends Component {
         super()
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            error:'',
         }
     }
 
@@ -24,7 +25,16 @@ class Login extends Component {
     }
 
     login(email, pass){
-        auth.signInWithEmailAndPassword(email, pass)
+        if (this.state.email === ''){
+            this.setState({
+                error:'El campo de email es obligatorio!'
+            })
+        }  else if (this.state.password === ''){
+            this.setState({
+                error:'El campo de contraseña es obligatorio!'
+            })
+        } else {
+            auth.signInWithEmailAndPassword(email, pass)
             .then( response => {
                 //Cuando firebase responde sin error
                 console.log('Login ok', response);
@@ -39,10 +49,14 @@ class Login extends Component {
                 this.props.navigation.navigate('Menu')
 
             })
-            .catch( error => {
-                //Cuando Firebase responde con un error.
-                console.log(error);
+            .catch(e => 
+                {console.log('error:',e.message), 
+                this.setState({
+                    error: e.message
+                })
             })
+        }
+
     }
 
     render() {
@@ -68,6 +82,11 @@ class Login extends Component {
                     secureTextEntry={true}
                     value={this.state.password}
                 />
+
+                <View style={styles.errorContainer}>
+                    <Text styles={styles.error}>{this.state.error}</Text>
+                </View> 
+
                 <TouchableOpacity style={styles.button} onPress={() => this.login(this.state.email, this.state.password)}>
                     <Text style={styles.textButton}>Loguearse</Text>
                 </TouchableOpacity>
@@ -120,7 +139,17 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         textAlign: 'center',
-    }
+    },
+    error: {
+        color: 'red',
+        marginBottom: 10,
+        height: 10,
+    },
+    errorContainer: {
+        alignItems: 'center',
+        marginBottom: 2,
+        marginTop: 2,
+    },
 })
 
 export default Login;

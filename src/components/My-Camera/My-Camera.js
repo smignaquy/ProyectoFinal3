@@ -110,7 +110,7 @@ class MyCamera extends Component {
                                 style = { styles.cameraBody }
                             />
                             <TouchableOpacity  style = { styles.button } onPress={()=> this.SacarFoto()}>
-                                <Text>Sacar Foto</Text>
+                                <Text style={styles.textoBoton}>Sacar Foto</Text>
                             </TouchableOpacity>
                         </React.Fragment>
                     :
@@ -147,6 +147,13 @@ const styles = StyleSheet.create({
         width: 100, 
         height: 30,
         marginBottom: 10,
+        marginTop: 5, 
+    },
+    textoBoton: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
     }
 })
 

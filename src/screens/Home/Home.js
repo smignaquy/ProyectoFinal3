@@ -32,19 +32,19 @@ class Home extends Component{
         // }
     }
 
-    logout(){
-        auth.signOut()
-        .then(res => this.props.navigation.navigate('Login'))
-    }
+    // logout(){
+    //     auth.signOut()
+    //     .then(res => this.props.navigation.navigate('Login'))
+    // }
 
     render(){
         console.log(this.props.navigation);
         return(
             <View style={styles.formContainer}>
                 <Header style={styles.logo} navigate={this.props.navigation.navigate} />
-                <TouchableOpacity style={styles.editarPerfilBoton} onPress={() => this.logout()}>
+                {/* <TouchableOpacity style={styles.editarPerfilBoton} onPress={() => this.logout()}>
                             <Text style={styles.editarPerfilText}>Cerrar Sesión</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <Text style={styles.title}>Inicio</Text>
                 <TouchableOpacity style={styles.button} onPress={() => {this.props.navigation.navigate('CrearPost')}}>
                     <Text style={styles.textButton}>Crear Post</Text>

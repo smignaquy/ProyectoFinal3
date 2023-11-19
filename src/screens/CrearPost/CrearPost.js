@@ -38,7 +38,7 @@ class CrearPost extends Component {
             .add({
                 owner: owner, //auth.currentUser.email,
                 textoPost: textoPost, //this.state.textoPost,
-                fotoPerfil: this.state.fotoUrl ,
+                photo: this.state.fotoUrl ,
                 createdAt: createdAt, //Date.now()
             })
             .then(res =>   {

@@ -23,15 +23,15 @@ class Register extends Component {
     createUser(email, pass, userName, bio, fdp) {
         if (this.state.email === ''){
             this.setState({
-                email:'Este campo es obligatorio!'
+                error:'El campo de email es obligatorio!'
             })
         } else if (this.state.userName === ''){
             this.setState({
-                userName:'Este campo es obligatorio!'
+                error:'El campo de username es obligatorio!'
             })
         } else if (this.state.password === ''){
             this.setState({
-                password:'Este campo es obligatorio!'
+                error:'El campo de contraseña es obligatorio!'
             })
         } else {
             auth.createUserWithEmailAndPassword(email, pass)
@@ -51,10 +51,10 @@ class Register extends Component {
                 })
 
                 this.setState({
-                    email: 'Correo electrónico (obligatorio)',
-                    userName: 'Nombre de usuario (obligatorio)',
-                    password: 'Contraseña (obligatorio)',
-                    bio: "Cuentame de tí (no obligatorio)"
+                    email: '',
+                    userName: '',
+                    password: '',
+                    bio: ""
                 })
 
                 this.props.navigation.navigate('Menu')
@@ -118,16 +118,21 @@ class Register extends Component {
                     onPress={() => {}}
                 >
                 </TouchableOpacity>
-                <Text styles={styles.error}>{this.state.error}</Text>
                     { this.state.mostarcamara ?
                         <View style={styles.camara}>
                             <MyCamera traerUrlDeFoto={(url)=>this.traerUrlDeFoto(url)} />
                         </View>
                     :
-                        <TouchableOpacity style={styles.input} onPress={() => this.setState({ mostarcamara: true })}>
-                            <Text>Foto de perfil</Text>
+                    <View style={styles.contenedorFotoPerfil}>
+                        <TouchableOpacity style={styles.botonPerfil} onPress={() => this.setState({ mostarcamara: true })}>
+                            <Text style={styles.textoPerfil}>Sacar foto de perfil</Text>
                         </TouchableOpacity>
+                    </View>
                     }  
+
+                <View style={styles.errorContainer}>
+                    <Text styles={styles.error}>{this.state.error}</Text>
+                </View> 
 
             {/* QUEDA LA CAMARA PARA LA IMAGEN DE USUARIO */}
 
@@ -196,6 +201,32 @@ const styles = StyleSheet.create({
         color: 'red',
         marginBottom: 10,
         height: 10,
+    },
+    errorContainer: {
+        alignItems: 'center',
+        marginBottom: 2,
+        marginTop: 2,
+    },
+    camara:{
+        alignItems: 'center',
+    },
+    botonPerfil: {
+        backgroundColor: '#1DA1F2',
+        paddingVertical: 20,
+        width: 200,
+        height: 20,
+        alignItems: 'center',
+        borderRadius: 5,
+    },
+    textoPerfil: {
+        color: 'white',
+        fontSize: 14,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    contenedorFotoPerfil: {
+        alignItems: 'center',
+        borderRadius: 5,
     }
 })
 
