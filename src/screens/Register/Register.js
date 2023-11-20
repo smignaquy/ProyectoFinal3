@@ -3,6 +3,7 @@ import { TextInput, TouchableOpacity, View, Text, StyleSheet, Image} from 'react
 import { db, auth } from '../../firebase/config';
 import Logo from '../../../assets/icon.png';
 import MyCamera from '../../components/My-Camera/My-Camera'
+import foto from '../../../assets/bauti.jpg'
 
 
 
@@ -42,19 +43,26 @@ class Register extends Component {
 
                 // Cambiar los estados a vacío como están al inicio.
 
+                if(fdp == ''){
+                    this.setState({
+                        fdp: foto,
+                    })
+                }
                 // Crear la colección Users
                 db.collection('users').add({
                     owner : auth.currentUser.email,
                     userName : userName,
                     createdAt : Date.now(),
-                    bio : bio 
+                    bio : bio,
+                    fotoPerfil: this.state.fdp,
                 })
 
                 this.setState({
                     email: '',
                     userName: '',
                     password: '',
-                    bio: ""
+                    bio: "",
+                    fdp: '',
                 })
 
                 this.props.navigation.navigate('Menu')
@@ -71,7 +79,7 @@ class Register extends Component {
     
     traerUrlDeFoto(url){
         this.setState({
-            fotoDePerfil : url,
+            fdp : url,
             mostarcamara : false,
         })
     }

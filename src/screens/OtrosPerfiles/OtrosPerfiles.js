@@ -60,10 +60,17 @@ class MiPerfil extends Component {
                 {this.state.usuarios.length > 0 ? (
                     <View style={styles.profileContainer}>
                         <Text style={styles.title}>{this.state.usuarios[0].userName}</Text>
-                        <Image
-                            source={foto}
-                            style={styles.avatar}
-                        />
+                        {this.state.usuarios[0].fotoPerfil == '' ? (
+                            <Image
+                                source={foto}
+                                style={styles.avatar}
+                            />
+                        ) : (
+                            <Image
+                                source={this.state.usuarios[0].fotoPerfil}
+                                style={styles.avatar}
+                            />
+                        )}
                         <View style={styles.lineaAzul}></View>
                         <Text style={styles.username}>{this.state.usuarios[0].owner}</Text>
                         {this.state.usuarios[0].bio === '' || !this.state.usuarios[0].bio ? (

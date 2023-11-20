@@ -79,10 +79,17 @@ class Post extends Component {
             <View style={styles.postContainer}>
                 <View style={styles.container}>
                     <TouchableOpacity style={styles.fotoUsuario} onPress={() => {this.props.navigate('OtrosPerfiles', {owner: this.props.infoPost.data.owner})}}>
-                        <Image
-                            source={foto}
-                            style={styles.avatar}
-                        />
+                        {this.props.infoPost.data.fotoPerfil == '' ? (
+                            <Image
+                                source={foto}
+                                style={styles.avatar}
+                            />
+                        ) : (
+                            <Image
+                                source={this.props.infoPost.data.fotoPerfil}
+                                style={styles.avatar}
+                            />
+                        )}
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {this.props.navigate('OtrosPerfiles', {owner: this.props.infoPost.data.owner})}}>
                         <Text style={styles.postUsario}>{this.props.infoPost.data.owner}</Text>
