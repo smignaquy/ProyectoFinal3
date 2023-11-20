@@ -10,11 +10,15 @@ class MyCamera extends Component {
             permisos:false, //permisos de acceso al hardware para usar la cámara.
             urlInternaFoto: '', //aca va la url temporal interna de la foto.
             mostrarCamara: true,
+            estado: '',
         }
         this.metodosDeCamara = '' //referenciar a los métodos internos del componente camera.
     }
 
     componentDidMount(){
+        this.setState({
+            estado: '',
+        })
        //Pedir permisos para uso del hardware.
        Camera.requestCameraPermissionsAsync()
             .then( () => {
@@ -42,6 +46,7 @@ class MyCamera extends Component {
         this.setState({
             urlInternaFoto:'',
             mostrarCamara: true,
+            estado: ''
         })
     }
 
@@ -62,6 +67,7 @@ class MyCamera extends Component {
                                 //Borra la url temporal del estado.
                                 this.setState({
                                     urlInternaFoto: '',
+                                    estado: 'La foto se cargo correctamente!'
                                 })
                                 // this.props.cambioEstadoPublicar (true)
                             } )
@@ -85,7 +91,7 @@ class MyCamera extends Component {
                     this.state.permisos ?
                         this.state.mostrarCamara === false ?
                         //Preview
-                        <React.Fragment>
+                        <React.Fragment style={styles.fragment}>
                             <Image 
                                 source={{uri:this.state.urlInternaFoto}}
                                 style={ styles.cameraBody }
@@ -93,11 +99,12 @@ class MyCamera extends Component {
                             {/* Corregir estilos para que se vea la imagen */}
                             {/* Corregir estilos para que los botones desaparezcan una vez que el usuario aceptó o canceló el preview */}
                             <TouchableOpacity style={styles.botonAceptar} onPress={ () => this.guardarFoto() }>
-                                <Text>Aceptar</Text>
+                                <Text style={styles.textoAceptar}>Aceptar</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.botonCancelar} onPress={()=>this.cancelar()}>
-                                <Text>Cancelar</Text>
+                                <Text style={styles.textoCancelar}>Cancelar</Text>
                             </TouchableOpacity>
+                            <Text>{this.state.estado}</Text>
                         </React.Fragment>
                         
                         :
@@ -114,7 +121,7 @@ class MyCamera extends Component {
                             </TouchableOpacity>
                         </React.Fragment>
                     :
-                    <Text>La cámara no tiene permisos</Text>
+                    <Text style={styles.permisos}>La cámara no tiene permisos</Text>
 
                 }
             </View>
@@ -131,13 +138,13 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         textAlign: 'center',
-        width: 100,
-        height:100
+        width: 200,
+        height:300
     },
     cameraBody: {
         flex:7,
-        width:100,
-        height:100
+        width: 200,
+        height:200
     },
     button:{
         marginLeft: 20,
@@ -161,6 +168,8 @@ const styles = StyleSheet.create({
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius: 4,
+        marginBottom: 5,
+        marginTop: 5,
     },
     botonCancelar: {
         backgroundColor: '#1DA1F2',
@@ -169,17 +178,24 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         borderRadius: 4,
     },
+    textoAceptar: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    textoCancelar: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    permisos: {
+        width: 300,
+    },
+    fragment: {
+        width: 300,
+        alignItems: 'center',
+    }
 })
-
-// const styles = StyleSheet.create({
-
-//     textButton: {
-//         color: 'white',
-//         fontSize: 16,
-//         fontWeight: 'bold',
-//         textAlign: 'center',
-//     },
-// })
 
 
 export default MyCamera;

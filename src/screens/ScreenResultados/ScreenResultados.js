@@ -60,7 +60,7 @@ class ScreenResultados extends Component {
                                         <TouchableOpacity style={styles.mailContainer} onPress={() => {this.props.navigation.navigate('OtrosPerfiles', {owner: item.owner})}} >
                                             <Text style={styles.postUsario}>{item.owner}</Text>
                                             <Text>{item.userName}</Text>
-                                            {this.state.usuarios[0].fotoPerfil == '' ? (
+                                            {item.fotoPerfil == '' ? (
                                                 <Image
                                                     source={foto}
                                                     style={styles.avatar}
