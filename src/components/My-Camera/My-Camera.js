@@ -92,10 +92,10 @@ class MyCamera extends Component {
                             />
                             {/* Corregir estilos para que se vea la imagen */}
                             {/* Corregir estilos para que los botones desaparezcan una vez que el usuario aceptó o canceló el preview */}
-                            <TouchableOpacity onPress={ () => this.guardarFoto() }>
+                            <TouchableOpacity style={styles.botonAceptar} onPress={ () => this.guardarFoto() }>
                                 <Text>Aceptar</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={()=>this.cancelar()}>
+                            <TouchableOpacity style={styles.botonCancelar} onPress={()=>this.cancelar()}>
                                 <Text>Cancelar</Text>
                             </TouchableOpacity>
                         </React.Fragment>
@@ -154,7 +154,21 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         textAlign: 'center',
-    }
+    },
+    botonAceptar: {
+        backgroundColor: '#1DA1F2',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius: 4,
+    },
+    botonCancelar: {
+        backgroundColor: '#1DA1F2',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius: 4,
+    },
 })
 
 // const styles = StyleSheet.create({
