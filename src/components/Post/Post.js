@@ -74,7 +74,7 @@ class Post extends Component {
   
 
     render() {
-        console.log(this.props.infoPost);
+        console.log(this.props.infoPost.data.photo);
         return (
             <View style={styles.postContainer}>
                 <View style={styles.container}>
@@ -86,7 +86,7 @@ class Post extends Component {
                             />
                         ) : (
                             <Image
-                                source={this.props.infoPost.data.fotoPerfil}
+                                source={this.props.infoPost.data.photo}
                                 style={styles.avatar}
                             />
                         )}

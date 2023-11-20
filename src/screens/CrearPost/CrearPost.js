@@ -70,7 +70,9 @@ class CrearPost extends Component {
                     <Text style={styles.title}>Crear Post</Text>
                 </View>
                 <Text style={styles.userInfo}>Dueño del Post: {auth.currentUser.email}</Text>
-                <MyCamera cambioEstadoPublicar={(value)=> this.cambioEstadoPublicar(value)} traerUrlDeFoto={(url)=>this.traerUrlDeFoto(url)} stylss={styles.botonFoto}/>
+                <View style={styles.containerPhoto}>
+                    <MyCamera style={styles.photo} cambioEstadoPublicar={(value)=> this.cambioEstadoPublicar(value)} traerUrlDeFoto={(url)=>this.traerUrlDeFoto(url)} stylss={styles.botonFoto}/>
+                </View>
                 <TextInput
                     style={styles.textInput}
                     onChangeText={(text) => this.setState({ textoPost: text })}
@@ -100,6 +102,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         paddingHorizontal: 20,
         paddingTop: 15,
+    },
+    containerPhoto: {
+        alignSelf: 'center'
+    },
+    photo: {
+        width: 500,
+        height: 500,
     },
     avatar: {
         alignSelf: 'center',
