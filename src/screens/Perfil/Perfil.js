@@ -30,7 +30,7 @@ class MiPerfil extends Component {
             }
         )
 
-        db.collection('posts').where("owner", "==", auth.currentUser.email).onSnapshot(
+        db.collection('posts').where("owner", "==", auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot(
             docs => {
                 let posts = []
                 docs.forEach(doc => {
@@ -105,7 +105,7 @@ console.log(posts)
                         <FlatList 
                             style={styles.flatlist}
                             data= {this.state.posteos}
-                            keyExtractor={ doc => doc.createdAt}
+                            keyExtractor= { doc => doc.createdAt }
                             renderItem={ ({item}) => <Post infoPost={item} navigate={this.props.navigation.navigate}/> }
                         />
                     </View>

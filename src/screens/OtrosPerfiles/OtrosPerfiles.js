@@ -32,7 +32,7 @@ class MiPerfil extends Component {
         )
 
         //traigo posteos
-        db.collection('posts').where("owner", "==", this.props.route.params.owner).onSnapshot(
+        db.collection('posts').where("owner", "==", this.props.route.params.owner).orderBy('createdAt', 'desc').onSnapshot(
             docs => {
                 let posts = []
                 docs.forEach(doc => {
